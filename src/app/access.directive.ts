@@ -15,7 +15,7 @@ export class AccessDirective {
   ) { }
   @Input() set accessDirective(nombre: string) {
     console.log('accessDirective',nombre)
-    this.miInfoService.roleChanges.subscribe(rol => {
+    const shouldShow = () => {
       if (this.accessService.hasAccess(nombre)){
         this.viewContainer.clear()
         this.viewContainer.createEmbeddedView(
@@ -27,7 +27,9 @@ export class AccessDirective {
         this.viewContainer.clear()
         this.hasView = false;
       }
-    });
+    }
+    shouldShow()
+    this.miInfoService.roleChanges.subscribe(shouldShow);
   }
 
 }

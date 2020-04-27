@@ -10,6 +10,9 @@ import { Service1Service } from './service1.service';
 import { Service2Service } from './service2.service';
 import { Service3Service } from './service3.service';
 import { AccessDirective } from './access.directive';
+import { AccesoFallidoService } from './acceso-fallido.service';
+import { MiInfoService } from './mi-info.service';
+import { PermisosService } from './permisos.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,10 @@ import { AccessDirective } from './access.directive';
     AccessService,
     Service1Service,
     Service2Service,
-    Service3Service
+    Service3Service,
+    PermisosService,
+    MiInfoService,
+    AccesoFallidoService,
   ],
   bootstrap: [AppComponent]
 })
