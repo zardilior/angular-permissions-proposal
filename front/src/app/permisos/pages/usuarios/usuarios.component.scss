@@ -1,0 +1,73 @@
+.usuarios {
+  .header{
+    .title {
+      text-align:center;
+    }
+  }
+  .body {
+    padding: 10px;
+    box-shadow: 2px 2px 5px 1px #ccc;
+    border: 1px solid #ccc;
+    display: flex;
+    .column {
+      flex: 1;
+      box-shadow: 2px 2px 5px 1px #ccc;
+      border: 1px solid #ccc;
+      margin: 10px;
+      .guardar {
+        width: 100%;
+        padding: 5px;
+        box-sizing: border-box;
+      }
+      .title {
+        padding: 30px 20px;
+        padding-bottom: 10px;
+        margin: 0;
+      }
+      &.ver-usuarios{
+        .usuarios {
+          border-top: 1px solid #ccc;
+          .usuario {
+            padding: 10px 20px;
+            border-bottom: 1px solid #ccc;
+          }
+        }
+      }
+      &.permisos-usuarios {
+        .paquetes {
+          max-height: 60vh;
+          overflow-y: auto;
+          .paquete {
+            padding: 10px 20px;
+            border-top: 1px solid #ccc;
+            .paquete-name {
+              font-weight: 800;
+              margin-bottom: 15px;
+              .quitar-button {
+                margin-top: 5px;
+                width: 100%;
+                display: block;
+              }
+            }
+            .paquete-permisos-numero {
+              border-top: 1px solid #ccc;
+              padding-top: 5px;
+              .open-button {
+                float:right;
+              }
+            }
+            .paquete-permisos {
+              .close-button {
+                float: right;
+              }
+              .permiso {
+                padding: 5px 0;
+                border-top: 1px solid #ccc;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

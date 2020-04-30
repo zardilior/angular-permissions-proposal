@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { MiInfoService } from './mi-info.service';
-import { PermisosService } from './permisos.service';
+import { PermisosUsuariosService } from './permisos-usuarios/permisos-usuarios.service';
 
 @Injectable()
 export class AccessService {
@@ -8,8 +8,7 @@ export class AccessService {
   private static service = undefined;
 
   public constructor(
-    private permisosService: PermisosService,
-    private miInfoService: MiInfoService,
+    private permisosUsuarios: PermisosUsuariosService,
   ) {
      AccessService.service = this;
   }
@@ -19,11 +18,15 @@ export class AccessService {
      }
      return AccessService.service;
   }
-  public hasAccess(nombre) {
-    const role = this.miInfoService.getRole();
-    if (!role){
+  public async hasAccess(nombre) {
+    // TODO: change for an actual user
+    const userId = 1;
+    if (!userId){
       return false
     }
-    return this.permisosService.getPermisos(role).find(permiso => permiso==nombre)!=undefined;
+    const permisos = await this.permisosUsuarios.getPermisosUsuario(userId)
+    return permisos.find(
+      permiso => permiso==nombre
+    )!=undefined;
   }
 }

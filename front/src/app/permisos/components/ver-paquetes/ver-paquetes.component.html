@@ -1,0 +1,24 @@
+<div class='ver-paquetes column'> 
+  <h3 class='title'>Paquetes</h3>
+  <div class='controles'>
+    <input class='search' [(ngModel)]='search' placeholder='Buscar por nombre'>
+    <div>
+      <label>Filtrar por categoria</label>
+      <select [(ngModel)]='categoriaSelected'> 
+        <option value=''>Todas</option>
+        <option *ngFor='let categoria of categorias' [value]='categoria'>
+        {{ categoria }}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class='paquetes'>
+    <div 
+      *ngFor='let paquete of displayPaquetes;trackBy:trackById' 
+      class='paquete' 
+      (click)='selectPaquete(paquete)'
+    >
+      {{paquete.categoria}} - {{paquete.nombre}}
+    </div>
+  </div>
+</div>

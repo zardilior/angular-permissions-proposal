@@ -1,0 +1,63 @@
+<div class='usuarios'>
+  <div class='header'>
+    <h2 class='title'>
+      Usuarios
+    </h2>
+    <p> Por medio de paquetes pero con granularidad a nivel permiso,
+    se asignan los permisos a los usuarios. Tu eres el usuario 1 </p>
+  </div>
+  <div class='body'>
+    <!-- ver usuarios (estrictamente tu)-->
+    <div class='ver-usuarios column'>
+      <h3 class='title'>
+        Lista de Usuarios
+      </h3>
+      <div class='usuarios'>
+        <div class='usuario'> 
+          Usuario 1
+        </div>
+      </div>
+    </div>
+    <!-- ver permisos usuarios -->
+    <div class='permisos-usuarios column'>
+      <h3 class='title'>
+        Permisos para el usuario 1
+      </h3>
+      <div class='paquetes'>
+        <!-- Por cada paquete seleccionado -->
+        <div *ngFor='let paquete of paquetesSeleccionados;trackBy:trackById' class='paquete'>
+          <!-- header del paquete -->
+          <div class='paquete-name'>
+            {{paquete.categoria}} - {{paquete.nombre}}
+            <button (click)='deselectPaquete(paquete)' class='quitar-button'> Quitar todos </button>
+          </div>
+          <!-- numero de permisos del paquete si cerrado -->
+          <div class='paquete-permisos-numero' *ngIf='!paquete.abierto' >
+            {{ paquete.permisos.length }} permisos
+            <button (click)='paquete.abierto = true' class='open-button'> open </button>
+          </div>
+          <!-- permisos del paquete si abierto -->
+          <div class='paquete-permisos' *ngIf='paquete.abierto'>
+            <button (click)='paquete.abierto = false' class='close-button'> close </button>
+            <div *ngFor='let permiso of paquete.permisos;trackBy:trackByName' class='permiso'>
+              <label>{{ permiso.nombre_mostrable }}</label> -  
+              <label><small><i>{{ permiso.nombre }}</i></small></label>
+              <input 
+               type='checkbox' 
+               [value]='permiso.nombre' 
+               [checked]='permisosUsuario.indexOf(permiso.nombre)!=-1' 
+               (click)='togglePermiso(permiso.nombre)'
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <button (click)='asignarPermisosUsuario()' class='guardar'>
+        Guardar
+      </button>
+    </div>
+    <!-- ver paquetes -->
+    <app-ver-paquetes class='column' (paqueteSelected)='selectPaquete($event)' [paquetes]='paquetes'> 
+    </app-ver-paquetes>
+  </div>
+</div>

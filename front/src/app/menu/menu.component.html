@@ -1,0 +1,39 @@
+<div class='menu'>
+  <h3>Permisos</h3>
+  <p> Esta app es una demo de la propuesta de permisos</p>
+  <div class='sections'>
+    <div class="column" routerLink="/permisos/permisos">
+      <h4>Permisos</h4>
+      <ul class='funcionalidades'>
+        <li>Ver permisos</li>
+        <li>Crear Permisos permisos</li>
+      </ul>
+     <button [routerLink]="'/permisos/permisos'">
+       Ir a
+     </button>
+    </div>
+    <div class="column" routerLink="/permisos/paquetes">
+      <h4>Paquetes </h4>
+      <ul class='funcionalidades'>
+        <li>Ver paquetes de permisos</li>
+        <li>Asignar permisos a paquetes</li>
+        <li>ver permisos</li>
+      </ul>
+     <button routerLink="/permisos/paquetes">
+       Ir a
+     </button>
+    </div>
+     <div class='column' routerLink="/permisos/usuarios">
+      <h4>Usuarios</h4>
+      <ul class='funcionalidades'>
+        <li>Ver usuarios</li>
+        <li>Asignar permisos a usuarios, por medio de paquetes</li>
+        <li>ver paquetes</li>
+        <li>ver permisos</li>
+      </ul>
+     <button routerLink="/permisos/usuarios">
+       Ir a
+     </button>
+    </div>
+  </div>
+</div>

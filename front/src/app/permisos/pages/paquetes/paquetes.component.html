@@ -1,0 +1,71 @@
+<div class='paquetes'>
+  <div class='header'>
+    <h2 class='title'>Paquetes de Permisos</h2>
+    <p>Los paquetes de permisos contienen a otros permisos y se clasifican por categorias,
+    de esta forma se organizan los permisos haciendo mas sencilla su administracion</p>
+  </div>
+  <div class='body'> 
+    <!-- Ver paquetes seleccionados-->
+    <div class='ver-paquetes column' *ngIf='!crear'> 
+      <h3 class='title'>Paquetes</h3>
+      <button class='nuevo' (click)='crear=true'>
+        Nuevo 
+      </button><br>
+      <div class='controles'>
+        <input class='search' [(ngModel)]='search' placeholder='Buscar por nombre'>
+        <div>
+          <label>Filtrar por categoria</label>
+          <select [(ngModel)]='categoriaSelected'> 
+            <option value=''>Todas</option>
+            <option *ngFor='let categoria of categorias' [value]='categoria'>
+            {{ categoria }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class='paquetes'>
+        <div 
+          *ngFor='let paquete of displayPaquetes;trackBy:trackById' 
+          class='paquete' 
+          (click)='selectPaquete(paquete)'
+        >
+          {{paquete.categoria}} - {{paquete.nombre}}
+          <span class='close' (click)='deletePaquete(paquete.id)'> X </span>
+        </div>
+      </div>
+    </div>
+    <div class='crear-paquete column' *ngIf='crear'> 
+      <h3 class='title'>Crear Paquete</h3>
+      <button (click)='crear=false' class='regresar'>
+        Regresar 
+      </button>
+      <div class='forma'>
+        <input [(ngModel)]='nuevoPaquete.nombre' placeholder='Nombre'>
+        <input [(ngModel)]='nuevoPaquete.categoria' placeholder='Categoria'>
+        <button (click)='crearPaquete()'>Crear</button>
+      </div>
+    </div>
+    <!-- Ver permisos seleccionados-->
+    <app-ver-permisos class='column' 
+      [title]="'Permisos Asignados a '+ paqueteSeleccionado.nombre"
+      [initialLoad]='false'
+      [canDelete]='false'
+      [(permisos)]='permisosSeleccionados' 
+      (permisoSelected)='deSelectPermiso($event)'
+      *ngIf='paqueteSeleccionado'
+    >
+      <button (click)='guardarPermisos()' id='guardar'>
+        Guardar
+      </button>
+    </app-ver-permisos>
+    <!-- lista para ver permisos -->
+    <app-ver-permisos
+      title='Catalogo de Permisos'
+      class='column' 
+      [canDelete]='false'
+      [(permisos)]='permisos' 
+      (permisoSelected)='selectPermiso($event)' 
+    >
+    </app-ver-permisos>
+  </div>
+</div>

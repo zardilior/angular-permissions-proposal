@@ -1,0 +1,23 @@
+<ul class='lista-permisos'>
+  <li class='permiso'> 
+    <h3>{{title}}</h3>
+    <input [(ngModel)]='search' placeholder='Filtrar Permisos por Nombre'>
+  </li>
+  <li 
+    *ngFor='let permiso of displayPermisos;trackBy: trackByFn' 
+    (click)='selectPermiso(permiso)'
+    class='permiso' 
+  > 
+    <p>{{ permiso.nombre_mostrable }} </p>
+    <p><small><i>Permiso: {{ permiso.nombre }} </i></small></p>
+    <ng-container  *ngIf='canDelete'>
+      <span 
+        class='close' 
+        (click)='deletePermiso(permiso.nombre)'
+      > X </span>
+    </ng-container>
+  </li>
+  <div>
+    <ng-content></ng-content>
+  </div>
+</ul>

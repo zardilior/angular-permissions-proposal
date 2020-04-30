@@ -1,40 +1,9 @@
 <div class='app'>
-  <h3> Cambiar roles </h3>
-  <h5> Rol Actual: {{ rol }} </h5>
-  <h6> Permisos Rol Actual: {{ permisos | json }} </h6>
-  <div class='roles'>
-    <button (click)="rol='rol0'" style='background-color:white' >
-      Rol0
-    </button>
-    <button (click)="rol='rol1'" style='background-color:green'>
-      Rol1 
-    </button>
-    <button (click)="rol='rol2'" style='background-color:orange'>
-      Rol2
-    </button>
-    <button (click)="rol='rol3'" style='background-color:red' >
-      Rol3
-    </button>
+  <div class='header'>
+    <h1>
+      Bienvenidos a la propuesta de permisos 
+    </h1>
+    <button routerLink='/menu'>Regresar al menu</button>
   </div>
-  <div class='botones'>
-    <h3> Activar componentes </h3>
-    <h5> Seleccion actual: {{ selected }} </h5>
-    <button (click)="selected='button1'" style='background-color:green'>
-      Button1
-    </button>
-    <button (click)="selected='button2'" style='background-color:orange'>
-      Button2
-    </button>
-    <button (click)="selected='button3'" style='background-color:red' *accessDirective="'boton3'">
-      Button3
-    </button>
-  </div>
-  <div class='components'>
-    <app-component1 *ngIf="selected=='button1'">
-    </app-component1>
-    <app-component2 *ngIf="selected=='button2'">
-    </app-component2>
-    <app-component3 *ngIf="selected=='button3'">
-    </app-component3>
-  </div>
+  <router-outlet> </router-outlet>
 </div>

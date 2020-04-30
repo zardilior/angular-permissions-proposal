@@ -1,0 +1,20 @@
+<div class='permisos'>
+  <div class='header'>
+    <h2 class='title'>
+      Permisos
+    </h2>
+    <p> Los permisos se usan para restringir acciones en el software</p>
+  </div>
+  <div class='body'>
+    <!-- lista para ver permisos -->
+    <app-ver-permisos class='column' [(permisos)]='permisos'>
+    </app-ver-permisos>
+    <!-- forma para crear permisos -->
+    <div class='forma-nuevo-permiso column' >
+      <h3>Crear Nuevo Permiso</h3>
+      <input [(ngModel)]='nuevoPermiso.nombre_mostrable' placeholder='Nombre que se mostrara en el menu'>
+      <input class='small italic' [(ngModel)]='nuevoPermiso.nombre' placeholder='Nombre del permiso'>
+      <button (click)='addPermiso()'>Crear</button>
+    </div>
+  </div>
+</div>

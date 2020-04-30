@@ -1,0 +1,40 @@
+.permisos {
+  .header{
+    .title {
+      text-align:center;
+    }
+  }
+  .body{
+    padding: 10px;
+    box-shadow: 2px 2px 5px 1px #ccc;
+    border: 1px solid #ccc;
+    display: flex;
+    .column {
+      flex: 1;
+      box-shadow: 2px 2px 5px 1px #ccc;
+      border: 1px solid #ccc;
+      margin: 30px;
+      &.forma-nuevo-permiso {
+        padding: 10px 20px;
+        input {
+          margin: 10px 0 ;
+          width: 100%;
+          padding: 5px;
+          box-sizing: border-box;
+          font-size: 120%;
+          &.italic {
+            font-style: italic;
+          }
+          &.small {
+            font-size: 80%;
+          }
+        }
+        button {
+          margin: 10px 0 ;
+          width: 100%;
+          padding: 5px;
+        }
+      }
+    }
+  }
+}

@@ -2,9 +2,7 @@ import { AccessService } from './access.service';
 import { AccesoFallidoService } from './acceso-fallido.service';
 
 export function AccessMethod(nombre){
-  console.log(nombre);
   return function (target, propertyKey, descriptor) {
-    console.log(target, propertyKey, descriptor);
     const newFunc = descriptor.value;
     descriptor.value = function(...args: any[]) {
       // inject services

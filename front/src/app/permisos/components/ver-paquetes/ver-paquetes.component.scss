@@ -1,0 +1,49 @@
+.ver-paquetes {
+  position: relative;
+  input {
+    padding: 5px;
+    margin: 5px 0;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .nuevo {
+    position:absolute;
+    top: 30px;
+    right: 20px;
+  }
+  .title {
+    padding: 30px 20px;
+    padding-bottom: 0;
+    margin: 0;
+  }
+  .controles {
+    border-top: 1px solid #ccc;
+    padding: 20px;
+    input,button {
+      width: 100%;
+      margin: 5px 0;
+    }
+    select,label { 
+      width: 40%;
+      margin: 2.5%; 
+    }
+    label {
+      font-size: 80%
+    }
+  }
+  .paquetes {
+    border-top: 1px solid #ccc;
+    .paquete{
+      border-bottom: .1px solid  #ddd;
+      padding: 8px 20px;
+      &:hover{
+        background-color: #ccc;
+      }
+      .close {
+        float: right;
+        color: #faa;
+        cursor:pointer;
+      }
+    }
+  }
+}
