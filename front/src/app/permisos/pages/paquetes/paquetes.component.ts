@@ -14,7 +14,7 @@ export class PaquetesComponent implements OnInit {
   removePermisos:any[] = [];
   categorias:Set<any> = new Set();
   categoriaSelected:string = '';
-  paqueteSeleccionado:any;
+  paqueteSeleccionado:any = null;
   search:string = '';
   permisosSeleccionados:any[] = [];
   permisos:any[] = [];
@@ -70,6 +70,8 @@ export class PaquetesComponent implements OnInit {
   }
 
   selectPermiso(selected){
+    if(this.paqueteSeleccionado === null)
+      return;
     this.moveFromArrayTo(this.permisos,this.permisosSeleccionados,selected);
     const index = this.removePermisos.indexOf(selected.nombre);
     if (index==-1)

@@ -48,7 +48,8 @@ export class VerPermisosComponent implements OnInit {
           const permisos = [...this._permisos]
           permisos.splice(index,1);
           this.permisosChange.emit(permisos)
-        }
+        },
+        error => alert('Este paquete no se pudo borrar, revise si no pertenece a un paquete o a un usuario')
       );
     }
   }

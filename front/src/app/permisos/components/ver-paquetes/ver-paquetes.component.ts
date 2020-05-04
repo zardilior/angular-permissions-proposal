@@ -14,10 +14,14 @@ import { PermisosService } from '../../permisos.service';
 })
 export class VerPaquetesComponent implements OnInit {
 
-  @Input() paquetes:any[] = [];
   search:string = '';
+  _paquetes:any[] = [];
   categoriaSelected:string = '';
   @Output('paqueteSelected') selectPaqueteEmitter = new EventEmitter<any>();
+
+  //computed
+  categorias:Set<any>;
+  displayPaquetes:any[] = [];
 
   constructor(
     private service:PermisosService
@@ -26,25 +30,40 @@ export class VerPaquetesComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  get categorias() {
+  @Input() set paquetes(paquetes:any[]) {
+    this._paquetes = paquetes;
+    this.calculateCategorias();
+    this.calculateDisplayPaquetes();
+  }
+  setCategoriaSelected(categoriaSelected){
+    this.categoriaSelected = categoriaSelected;
+    this.calculateDisplayPaquetes();
+  }
+  setSearch(search){
+    this.search = search;
+    this.calculateDisplayPaquetes();
+  }
+
+  calculateCategorias() {
     const categorias = new Set();
-    this.paquetes.forEach(
+    this._paquetes.forEach(
       paquete => {
         categorias.add(paquete.categoria)
       }
     );
-    return categorias;
+    this.categorias = categorias;
   }
 
   trackById(index, item) {
     return item.id
   }
 
-  get displayPaquetes() {
+  calculateDisplayPaquetes() {
     if(this.categoriaSelected === '' && this.search === '') {
-      return this.paquetes;
+      this.displayPaquetes = this._paquetes;
+      return;
     }
-    let results = this.paquetes;
+    let results = this._paquetes;
     if(this.categoriaSelected) {
       results = results.filter(
         paquete => this.categoriaSelected === paquete.categoria
@@ -55,7 +74,7 @@ export class VerPaquetesComponent implements OnInit {
         paquete => paquete.nombre.indexOf(this.search) != -1
       )
     }
-    return results;
+    this.displayPaquetes = results;
   }
 
   selectPaquete(selected) {
