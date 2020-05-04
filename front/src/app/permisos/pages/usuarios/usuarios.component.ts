@@ -13,6 +13,7 @@ export class UsuariosComponent implements OnInit {
   paquetes:any[] = [];
   paquetesSeleccionados:any[] = [];
   permisosUsuario:string[] = [];
+  permisosUsuarioDict = {};
   addPermisosUsuario:string[] = [];
   removePermisosUsuario:string[] = [];
   constructor(
@@ -23,6 +24,9 @@ export class UsuariosComponent implements OnInit {
     this.service.getPermisos().subscribe(
       permisos =>{
         this.permisos = permisos
+        this.permisos.forEach(
+          nombre => this.permisosUsuarioDict[nombre] = false
+        )
         this.cargarPaquetes();
       }
     );
@@ -31,7 +35,7 @@ export class UsuariosComponent implements OnInit {
   permisosInPaquete(paquete) {
     const count = paquete.permisos.reduce(
       (count, permiso) => {
-        if(this.permisosUsuario.indexOf(permiso.nombre)==-1)
+        if(this.permisosUsuarioDict[permiso.nombre] === false)
           return count
         return ++count;
       },
@@ -45,18 +49,19 @@ export class UsuariosComponent implements OnInit {
       paquetes => {
         this.paquetes = paquetes.filter(
           paquete => paquete.permisos !== null
-        )
+        );
         this.paquetes.forEach( 
           paquete => {
             paquete.permisos = paquete.permisos.split(',').map(
               nombre =>{ 
                 console.log(nombre)
-                return this.permisos.find(permiso => permiso.nombre === nombre)
+                const permiso = this.permisos.find(permiso => permiso.nombre === nombre)
+                return permiso
               }
             )
           }
-        )
-        this.getPermisosUsuario();
+        );
+        this.cargarPermisosUsuario();
       }
     )
   }
@@ -68,32 +73,18 @@ export class UsuariosComponent implements OnInit {
     }
   }
 
-  togglePermiso(nombre) {
+  togglePermiso(nombre:string) {
     const findex = this.permisosUsuario.indexOf(nombre)
     if(findex === -1) {
-      this.permisosUsuario.push(nombre)
-      const index = this.removePermisosUsuario.indexOf(nombre)
-      console.log(index)
-      if(index == -1) {
-        this.addPermisosUsuario.push(nombre)
-        console.log(this.addPermisosUsuario)
-      }else {
-        this.removePermisosUsuario.splice(index,1)
-      }
+      this.addPermisosUsuarioFunc(nombre);
     }
     else {
-      this.permisosUsuario.splice(findex,1)
-      const index = this.addPermisosUsuario.indexOf(nombre)
-      if(index == -1) {
-        this.removePermisosUsuario.push(nombre)
-      }else {
-        this.addPermisosUsuario.splice(index,1)
-      }
+      this.removePermisosUsuarioFunc(nombre);
     }
   }
   addPermisosUsuarioFunc(nombre) {
-    console.log('add')
     this.permisosUsuario.push(nombre)
+    this.permisosUsuarioDict[nombre] = true;
     const index = this.removePermisosUsuario.indexOf(nombre)
     if(index == -1) {
       this.addPermisosUsuario.push(nombre)
@@ -104,6 +95,7 @@ export class UsuariosComponent implements OnInit {
   }
   removePermisosUsuarioFunc(nombre) {
     const findex = this.permisosUsuario.indexOf(nombre)
+    this.permisosUsuarioDict[nombre] = false;
     this.permisosUsuario.splice(findex,1)
     const index = this.addPermisosUsuario.indexOf(nombre)
     if(index == -1) {
@@ -139,13 +131,15 @@ export class UsuariosComponent implements OnInit {
     }
   }
 
-  getPermisosUsuario(){
+  cargarPermisosUsuario(){
     // resetear paquetesSeleccionados y paquetes
     this.paquetes.push(...this.paquetesSeleccionados)
+
     this.service.getPermisosUsuario(1).subscribe(
       permisosUsuario =>{
         // obtener permisos
         this.permisosUsuario = permisosUsuario
+
         // encontrar paquetes que los contienen
         this.paquetesSeleccionados = this.permisosUsuario.map(
           nombre => {
@@ -162,6 +156,10 @@ export class UsuariosComponent implements OnInit {
             }
           }
         ).filter(paquete => paquete);
+
+        this.permisosUsuario.forEach(
+          nombre => this.permisosUsuarioDict[nombre] = true 
+        );
       }
     );
   }

@@ -33,7 +33,7 @@
           </div>
           <!-- numero de permisos del paquete si cerrado -->
           <div class='paquete-permisos-numero' *ngIf='!paquete.abierto' >
-            {{permisosInPaquete(paquete)}} / {{ paquete.permisos.length }} permisos
+            {{ permisosInPaquete(paquete) }} / {{ paquete.permisos.length }} permisos
             <button (click)='paquete.abierto = true' class='open-button'> open </button>
           </div>
           <!-- permisos del paquete si abierto -->
@@ -45,7 +45,7 @@
               <input 
                type='checkbox' 
                [value]='permiso.nombre' 
-               [checked]='permisosUsuario.indexOf(permiso.nombre)!=-1' 
+               [checked]='permisosUsuarioDict[permiso.nombre]' 
                (click)='togglePermiso(permiso.nombre)'
               >
             </div>
