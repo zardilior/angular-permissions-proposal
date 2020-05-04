@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PermisosService } from '../../permisos.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-usuarios',
@@ -30,7 +31,9 @@ export class UsuariosComponent implements OnInit {
   cargarPaquetes() {
     this.service.getPaquetes().subscribe(
       paquetes => {
-        this.paquetes = paquetes
+        this.paquetes = paquetes.filter(
+          paquete => paquete.permisos !== null
+        )
         this.paquetes.forEach( 
           paquete => {
             paquete.permisos = paquete.permisos.split(',').map(
@@ -48,7 +51,9 @@ export class UsuariosComponent implements OnInit {
 
   selectPaquete(selected){
     this.moveFromArrayTo(this.paquetes,this.paquetesSeleccionados,selected);
-    selected.permisos.forEach(permiso => this.addPermisosUsuarioFunc(permiso.nombre))
+    if (selected.permisos !==null) {
+      selected.permisos.forEach(permiso => this.addPermisosUsuarioFunc(permiso.nombre))
+    }
   }
 
   togglePermiso(nombre) {
