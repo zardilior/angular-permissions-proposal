@@ -25,7 +25,8 @@ export class PermisosComponent implements OnInit {
   }
   addPermiso() {
     this.servicio.createPermiso(this.nuevoPermiso).subscribe(
-      permiso => this.permisos.push(permiso)
+      permiso => this.permisos.push(permiso),
+      error => alert('No se pudo crear. Cheque si ya hay un permiso con ese nombre')
     );
   }
 

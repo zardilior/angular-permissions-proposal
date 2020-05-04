@@ -54,7 +54,6 @@ export class UsuariosComponent implements OnInit {
           paquete => {
             paquete.permisos = paquete.permisos.split(',').map(
               nombre =>{ 
-                console.log(nombre)
                 const permiso = this.permisos.find(permiso => permiso.nombre === nombre)
                 return permiso
               }
@@ -88,7 +87,6 @@ export class UsuariosComponent implements OnInit {
     const index = this.removePermisosUsuario.indexOf(nombre)
     if(index == -1) {
       this.addPermisosUsuario.push(nombre)
-      console.log(this.addPermisosUsuario,nombre)
     } else {
       this.removePermisosUsuario.splice(index,1)
     }
@@ -100,7 +98,6 @@ export class UsuariosComponent implements OnInit {
     const index = this.addPermisosUsuario.indexOf(nombre)
     if(index == -1) {
       this.removePermisosUsuario.push(nombre)
-      console.log(this.removePermisosUsuario,nombre)
     }else {
       this.addPermisosUsuario.splice(index,1)
     }
@@ -148,10 +145,13 @@ export class UsuariosComponent implements OnInit {
                 permiso => permiso.nombre === nombre
               ) != -1
             )
-            if (index!=-1) {
+            // si no esta en ingun paquete
+            if (index==-1) {
+              
+            }
+            else {
               const paquete = {...this.paquetes[index]};
               this.paquetes.splice(index,1);
-              console.log(paquete);
               return paquete
             }
           }
@@ -164,7 +164,6 @@ export class UsuariosComponent implements OnInit {
     );
   }
   asignarPermisosUsuario() {
-    console.log(this.addPermisosUsuario,this.removePermisosUsuario);
     this.service.asignarPermisosUsuario(1,this.addPermisosUsuario,this.removePermisosUsuario).subscribe(
       result => {
         this.addPermisosUsuario = [];

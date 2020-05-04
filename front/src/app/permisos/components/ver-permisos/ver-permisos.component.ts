@@ -60,7 +60,6 @@ export class VerPermisosComponent implements OnInit {
   }
 
   setSearch(search){
-    console.log(search);
     this.search = search;
     this.calculateDisplayPermisos();
   }

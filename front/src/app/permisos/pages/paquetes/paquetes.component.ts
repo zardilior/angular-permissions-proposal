@@ -73,6 +73,8 @@ export class PaquetesComponent implements OnInit {
     if(this.paqueteSeleccionado === null)
       return;
     this.moveFromArrayTo(this.permisos,this.permisosSeleccionados,selected);
+    // force component reactivity by reassigning prop
+    this.permisos = [...this.permisos];
     const index = this.removePermisos.indexOf(selected.nombre);
     if (index==-1)
       this.addPermisos.push(selected.nombre);
@@ -80,6 +82,8 @@ export class PaquetesComponent implements OnInit {
 
   deSelectPermiso(selected){
     this.moveFromArrayTo(this.permisosSeleccionados,this.permisos,selected);
+    // force component reactivity by reassigning prop
+    this.permisos = [...this.permisos];
     const index = this.addPermisos.indexOf(selected.nombre);
     if (index==-1)
       this.removePermisos.push(selected.nombre);
