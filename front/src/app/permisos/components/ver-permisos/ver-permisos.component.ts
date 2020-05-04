@@ -17,7 +17,8 @@ export class VerPermisosComponent implements OnInit {
   @Input() title:string = 'Lista Permisos';
   @Input() initialLoad:boolean = true;
   @Input() canDelete:boolean = true;
-  @Input() permisos: any[] = [];
+  displayPermisos: any[] = [];
+  _permisos: any[] = [];
   @Output() permisosChange = new EventEmitter<any[]>();
   @Output('permisoSelected') selectPermisoEmitter = new EventEmitter<string>();
   search:string = '';
@@ -43,8 +44,8 @@ export class VerPermisosComponent implements OnInit {
     if(answer) {
       this.servicio.deletePermiso(nombre).subscribe(
         result => {
-          const index = this.permisos.findIndex(permiso=>permiso.nombre==nombre)
-          const permisos = [...this.permisos]
+          const index = this._permisos.findIndex(permiso=>permiso.nombre==nombre)
+          const permisos = [...this._permisos]
           permisos.splice(index,1);
           this.permisosChange.emit(permisos)
         }
@@ -52,14 +53,27 @@ export class VerPermisosComponent implements OnInit {
     }
   }
 
+  @Input() set permisos(permisos){
+    this._permisos = permisos;
+    this.calculateDisplayPermisos();
+  }
+
+  setSearch(search){
+    console.log(search);
+    this.search = search;
+    this.calculateDisplayPermisos();
+  }
+
   trackByFn(index, item) { 
     return item.nombre;
   }
 
-  get displayPermisos() { 
-    if (this.search === '')
-      return this.permisos
-    return this.permisos.filter(
+  calculateDisplayPermisos() { 
+    if (this.search === ''){
+      this.displayPermisos =  this._permisos;
+      return
+    }
+    this.displayPermisos =  this._permisos.filter(
       (permiso) => permiso.nombre.toLowerCase().indexOf(this.search.toLowerCase()) != -1
     );
   }

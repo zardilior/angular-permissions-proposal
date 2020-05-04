@@ -9,6 +9,7 @@ import { PermisosService } from '../../permisos.service';
 export class PaquetesComponent implements OnInit {
 
   paquetes:any[] = [];
+  displayPaquetes:any[] = [];
   addPermisos:any[] = [];
   removePermisos:any[] = [];
   categorias:Set<any> = new Set();
@@ -30,7 +31,8 @@ export class PaquetesComponent implements OnInit {
   cargarPaquetes() {
     this.service.getPaquetes().subscribe(
       paquetes => {
-        this.paquetes = paquetes
+        this.paquetes = paquetes;
+        this.displayPaquetes = paquetes;
         this.paquetes.forEach(
           paquete => {
             this.categorias.add(paquete.categoria)
@@ -57,6 +59,14 @@ export class PaquetesComponent implements OnInit {
     this.permisos = this.permisos.filter(
       permiso => selected.permisos.indexOf(permiso.nombre) == -1
     );
+  }
+  setSearch(search){
+    this.search = search;
+    this.calculateDisplayPaquetes();
+  }
+  setCategoriaSelected(categoriaSelected){
+    this.categoriaSelected = categoriaSelected;
+    this.calculateDisplayPaquetes();
   }
 
   selectPermiso(selected){
@@ -87,9 +97,10 @@ export class PaquetesComponent implements OnInit {
     return item.id
   }
 
-  get displayPaquetes() {
+  calculateDisplayPaquetes() {
     if(this.categoriaSelected === '' && this.search === '') {
-      return this.paquetes;
+      this.displayPaquetes = this.paquetes;
+      return; 
     }
     let results = this.paquetes;
     if(this.categoriaSelected) {
@@ -102,7 +113,7 @@ export class PaquetesComponent implements OnInit {
         paquete => paquete.nombre.indexOf(this.search) != -1
       )
     }
-    return results;
+    this.displayPaquetes = results;
   }
 
   deletePaquete(id: number) {

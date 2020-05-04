@@ -1,7 +1,7 @@
 <ul class='lista-permisos'>
   <li class='permiso'> 
     <h3>{{title}}</h3>
-    <input [(ngModel)]='search' placeholder='Filtrar Permisos por Nombre'>
+    <input (ngModelChange)='setSearch($event)' [ngModel]='search' placeholder='Filtrar Permisos por Nombre'>
   </li>
   <li 
     *ngFor='let permiso of displayPermisos;trackBy: trackByFn' 

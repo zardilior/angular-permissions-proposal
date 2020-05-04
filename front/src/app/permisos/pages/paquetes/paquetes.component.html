@@ -12,10 +12,10 @@
         Nuevo 
       </button><br>
       <div class='controles'>
-        <input class='search' [(ngModel)]='search' placeholder='Buscar por nombre'>
+        <input class='search' (ngModelChange)='setSearch($event)' [ngModel]='search' placeholder='Buscar por nombre'>
         <div>
           <label>Filtrar por categoria</label>
-          <select [(ngModel)]='categoriaSelected'> 
+          <select (ngModelChange)='setCategoriaSelected($event)' [ngModel]='categoriaSelected'> 
             <option value=''>Todas</option>
             <option *ngFor='let categoria of categorias' [value]='categoria'>
             {{ categoria }}
