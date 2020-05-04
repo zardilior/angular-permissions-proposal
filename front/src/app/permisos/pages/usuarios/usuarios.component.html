@@ -33,7 +33,7 @@
           </div>
           <!-- numero de permisos del paquete si cerrado -->
           <div class='paquete-permisos-numero' *ngIf='!paquete.abierto' >
-            {{ paquete.permisos.length }} permisos
+            {{permisosInPaquete(paquete)}} / {{ paquete.permisos.length }} permisos
             <button (click)='paquete.abierto = true' class='open-button'> open </button>
           </div>
           <!-- permisos del paquete si abierto -->
@@ -50,6 +50,9 @@
               >
             </div>
           </div>
+        </div>
+        <div class='paquete' *ngIf='paquetesSeleccionados.length===0'>
+          No hay paquetes seleccionados todavia
         </div>
       </div>
       <button (click)='asignarPermisosUsuario()' class='guardar'>

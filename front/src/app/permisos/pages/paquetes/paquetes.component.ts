@@ -125,7 +125,8 @@ export class PaquetesComponent implements OnInit {
           paquete => paquete.id === id
         )
         this.paquetes.splice(index,1);
-      }
+      },
+      error => alert('Este paquete no se pudo borrar, revise si no pertenece a un paquete o a un usuario')
     );
   }
 

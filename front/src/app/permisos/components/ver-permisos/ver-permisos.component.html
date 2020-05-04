@@ -10,12 +10,15 @@
   > 
     <p>{{ permiso.nombre_mostrable }} </p>
     <p><small><i>Permiso: {{ permiso.nombre }} </i></small></p>
-    <ng-container  *ngIf='canDelete'>
+    <ng-container *ngIf='canDelete'>
       <span 
         class='close' 
         (click)='deletePermiso(permiso.nombre)'
       > X </span>
     </ng-container>
+  </li>
+  <li *ngIf='displayPermisos.length === 0' class='permiso'>
+    No hay permisos todavia
   </li>
   <div>
     <ng-content></ng-content>

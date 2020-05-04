@@ -20,5 +20,8 @@
     >
       {{paquete.categoria}} - {{paquete.nombre}}
     </div>
+    <div class='paquete' *ngIf='displayPaquetes.length === 0'>
+      No hay paquetes todavia
+    </div>
   </div>
 </div>

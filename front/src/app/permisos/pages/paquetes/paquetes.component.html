@@ -32,6 +32,9 @@
           {{paquete.categoria}} - {{paquete.nombre}}
           <span class='close' (click)='deletePaquete(paquete.id)'> X </span>
         </div>
+        <div class='paquete' *ngIf='displayPaquetes.length === 0'>
+          No hay paquetes todavia
+        </div>
       </div>
     </div>
     <div class='crear-paquete column' *ngIf='crear'> 

@@ -28,6 +28,18 @@ export class UsuariosComponent implements OnInit {
     );
   }
 
+  permisosInPaquete(paquete) {
+    const count = paquete.permisos.reduce(
+      (count, permiso) => {
+        if(this.permisosUsuario.indexOf(permiso.nombre)==-1)
+          return count
+        return ++count;
+      },
+      0
+    )
+    return count;
+  }
+
   cargarPaquetes() {
     this.service.getPaquetes().subscribe(
       paquetes => {
