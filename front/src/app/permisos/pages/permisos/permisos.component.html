@@ -7,10 +7,10 @@
   </div>
   <div class='body'>
     <!-- lista para ver permisos -->
-    <app-ver-permisos class='column' [(permisos)]='permisos'>
+    <app-ver-permisos class='column' [(permisos)]='permisos' *accessDirective="'listar-permiso'">
     </app-ver-permisos>
     <!-- forma para crear permisos -->
-    <div class='forma-nuevo-permiso column' >
+    <div class='forma-nuevo-permiso column' *accessDirective="'crear-permiso'">
       <h3>Crear Nuevo Permiso</h3>
       <input [(ngModel)]='nuevoPermiso.nombre_mostrable' placeholder='Nombre que se mostrara en el menu'>
       <input class='small italic' [(ngModel)]='nuevoPermiso.nombre' placeholder='Nombre del permiso'>

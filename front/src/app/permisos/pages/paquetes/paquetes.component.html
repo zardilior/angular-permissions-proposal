@@ -49,18 +49,20 @@
       </div>
     </div>
     <!-- Ver permisos seleccionados-->
-    <app-ver-permisos class='column' 
-      [title]="'Permisos Asignados a '+ paqueteSeleccionado.nombre"
-      [initialLoad]='false'
-      [canDelete]='false'
-      [(permisos)]='permisosSeleccionados' 
-      (permisoSelected)='deSelectPermiso($event)'
-      *ngIf='paqueteSeleccionado'
-    >
-      <button (click)='guardarPermisos()' id='guardar'>
-        Guardar
-      </button>
-    </app-ver-permisos>
+    <ng-container *accessDirective="'listar-permiso'">
+      <app-ver-permisos class='column' 
+        [title]="'Permisos Asignados a '+ paqueteSeleccionado.nombre"
+        [initialLoad]='false'
+        [canDelete]='false'
+        [(permisos)]='permisosSeleccionados' 
+        (permisoSelected)='deSelectPermiso($event)'
+        *ngIf='paqueteSeleccionado'
+      >
+        <button (click)='guardarPermisos()' id='guardar'>
+          Guardar
+        </button>
+      </app-ver-permisos>
+    </ng-container>
     <!-- lista para ver permisos -->
     <app-ver-permisos
       title='Catalogo de Permisos'
