@@ -12,12 +12,12 @@ import { PermisosServiceToken } from './access/permisos-service.interface';
 import { KeyServiceToken } from './access/key-service.interface';
 import { FailedAccessServiceToken } from './access/failed-access-service.interface';
 import { PermisosService } from './permisos/permisos.service';
-import { API_URL, API_URL_TOKEN } from './permisos/api-url.config'; 
+import { API_URL, API_URL_TOKEN } from './permisos/api-url.config';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MenuComponent
+    MenuComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -47,6 +47,6 @@ import { API_URL, API_URL_TOKEN } from './permisos/api-url.config';
     },
   ],
   bootstrap: [ AppComponent ],
-  exports: [ AppRoutingModule /*, AccessModule */]
+  exports: [ AppRoutingModule , AccessModule ]
 })
 export class AppModule { }

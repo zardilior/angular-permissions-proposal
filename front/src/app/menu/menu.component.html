@@ -1,4 +1,4 @@
-<div class='menu' >
+<div class='menu'  >
   <h3>Permisos</h3>
   <p> Esta app es una demo de la propuesta de permisos</p>
   <div class='sections'>
@@ -12,7 +12,7 @@
        Ir a
      </button>
     </div>
-    <div class="column" routerLink="/permisos/paquetes">
+    <div class="column" routerLink="/permisos/paquetes" *accessDirective="'pagina-paquetes'">
       <h4>Paquetes </h4>
       <ul class='funcionalidades'>
         <li>Ver paquetes de permisos</li>
@@ -23,7 +23,7 @@
        Ir a
      </button>
     </div>
-     <div class='column' routerLink="/permisos/usuarios">
+     <div class='column' routerLink="/permisos/usuarios" *accessDirective="'pagina-permisos-usuario'">
       <h4>Usuarios</h4>
       <ul class='funcionalidades'>
         <li>Ver usuarios</li>

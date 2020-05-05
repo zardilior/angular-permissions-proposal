@@ -1,7 +1,7 @@
-import { Observable } from 'rxjs';
+import { Subject } from 'rxjs';
 import { InjectionToken } from '@angular/core';
 
 export const KeyServiceToken = new InjectionToken('KeyService');
 export interface KeyService {
-  keyObservable: Observable<string>
+  keyObservable: Subject<string>
 }

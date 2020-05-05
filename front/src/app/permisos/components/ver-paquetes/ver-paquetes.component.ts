@@ -32,8 +32,8 @@ export class VerPaquetesComponent implements OnInit {
 
   @Input() set paquetes(paquetes:any[]) {
     this._paquetes = paquetes;
-    this.calculateCategorias();
     this.calculateDisplayPaquetes();
+    this.calculateCategorias();
   }
   setCategoriaSelected(categoriaSelected){
     this.categoriaSelected = categoriaSelected;

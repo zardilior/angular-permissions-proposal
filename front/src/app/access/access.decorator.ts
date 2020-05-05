@@ -1,15 +1,13 @@
 import { AccessService } from './access.service';
-import { AccesoFallidoService } from './acceso-fallido-service.interface';
+import { FailedAccessService } from './failed-access-service.interface';
 
 export function AccessMethod(nombre){
-  console.log(nombre);
   return function (target, propertyKey, descriptor) {
-    console.log(target, propertyKey, descriptor);
     const newFunc = descriptor.value;
     descriptor.value = function(...args: any[]) {
       // inject services
       const accessService:AccessService = AccessService.getService();
-      const accesoFallidoService:AccesoFallidoService = AccesoService.accesoFallidoService;
+      const accesoFallidoService:FailedAccessService = accessService.failedAccessService;
       // throw don't access error
       if (!accessService.hasAccess(nombre)){
         accesoFallidoService.failedAccess(nombre)
@@ -36,7 +34,7 @@ export function AccessAllMethods(nombre){
           const newFunc = descriptor.value;
           descriptor.value = function(...args: any[]) {
             const accessService:AccessService = AccessService.getService();
-            const accesoFallidoService:AccesoFallidoService = AccesoService.accesoFallidoService;
+            const accesoFallidoService:FailedAccessService = accessService.failedAccessService;
             // throw don't access error
             if (!accessService.hasAccess(nombre)){
               accesoFallidoService.failedAccess(nombre)

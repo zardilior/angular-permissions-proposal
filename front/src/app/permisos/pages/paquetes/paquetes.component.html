@@ -6,71 +6,82 @@
   </div>
   <div class='body'> 
     <!-- Ver paquetes seleccionados-->
-    <div class='ver-paquetes column' *ngIf='!crear'> 
-      <h3 class='title'>Paquetes</h3>
-      <button class='nuevo' (click)='crear=true'>
-        Nuevo 
-      </button><br>
-      <div class='controles'>
-        <input class='search' (ngModelChange)='setSearch($event)' [ngModel]='search' placeholder='Buscar por nombre'>
-        <div>
-          <label>Filtrar por categoria</label>
-          <select (ngModelChange)='setCategoriaSelected($event)' [ngModel]='categoriaSelected'> 
-            <option value=''>Todas</option>
-            <option *ngFor='let categoria of categorias' [value]='categoria'>
-            {{ categoria }}
-            </option>
-          </select>
+    <ng-container *accessDirective="'listar-paquete'">
+      <div class='ver-paquetes column' *ngIf='!crear'> 
+        <h3 class='title'>Paquetes</h3>
+        <button class='nuevo' (click)='crear=true' *accessDirective="'crear-paquete'">
+          Nuevo 
+        </button>
+        <div class='controles'>
+          <input class='search' (ngModelChange)='setSearch($event)' [ngModel]='search' placeholder='Buscar por nombre'>
+          <div>
+            <label>Filtrar por categoria</label>
+            <select (ngModelChange)='setCategoriaSelected($event)' [ngModel]='categoriaSelected'> 
+              <option value=''>Todas</option>
+              <option *ngFor='let categoria of categorias' [value]='categoria'>
+              {{ categoria }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class='paquetes'>
+          <div 
+            *ngFor='let paquete of displayPaquetes;trackBy:trackById' 
+            class='paquete' 
+            (click)='selectPaquete(paquete)'
+          >
+            {{paquete.categoria}} - {{paquete.nombre}}
+            <span 
+              class='close' 
+              (click)='deletePaquete(paquete.id)' 
+              *accessDirective="'borrar-paquete'"
+            >
+              X 
+            </span>
+          </div>
+          <div class='paquete' *ngIf='displayPaquetes.length === 0'>
+            No hay paquetes todavia
+          </div>
         </div>
       </div>
-      <div class='paquetes'>
-        <div 
-          *ngFor='let paquete of displayPaquetes;trackBy:trackById' 
-          class='paquete' 
-          (click)='selectPaquete(paquete)'
-        >
-          {{paquete.categoria}} - {{paquete.nombre}}
-          <span class='close' (click)='deletePaquete(paquete.id)'> X </span>
-        </div>
-        <div class='paquete' *ngIf='displayPaquetes.length === 0'>
-          No hay paquetes todavia
+    </ng-container>
+    <ng-container *accessDirective="'crear-paquete'">
+      <div class='crear-paquete column' *ngIf='crear' > 
+        <h3 class='title'>Crear Paquete</h3>
+        <button (click)='crear=false' class='regresar'>
+          Regresar 
+        </button>
+        <div class='forma'>
+          <input [(ngModel)]='nuevoPaquete.nombre' placeholder='Nombre'>
+          <input [(ngModel)]='nuevoPaquete.categoria' placeholder='Categoria'>
+          <button (click)='crearPaquete()'>Crear</button>
         </div>
       </div>
-    </div>
-    <div class='crear-paquete column' *ngIf='crear'> 
-      <h3 class='title'>Crear Paquete</h3>
-      <button (click)='crear=false' class='regresar'>
-        Regresar 
-      </button>
-      <div class='forma'>
-        <input [(ngModel)]='nuevoPaquete.nombre' placeholder='Nombre'>
-        <input [(ngModel)]='nuevoPaquete.categoria' placeholder='Categoria'>
-        <button (click)='crearPaquete()'>Crear</button>
-      </div>
-    </div>
+    </ng-container>
     <!-- Ver permisos seleccionados-->
-    <ng-container *accessDirective="'listar-permiso'">
-      <app-ver-permisos class='column' 
-        [title]="'Permisos Asignados a '+ paqueteSeleccionado.nombre"
+    <app-ver-permisos class='column' 
+      [title]="'Permisos Asignados a '+ paqueteSeleccionado.nombre"
+      [initialLoad]='false'
+      [canDelete]='false'
+      [(permisos)]='permisosSeleccionados' 
+      (permisoSelected)='deSelectPermiso($event)'
+      *ngIf='paqueteSeleccionado'
+    >
+      <button (click)='guardarPermisos()' id='guardar'>
+        Guardar
+      </button>
+    </app-ver-permisos>
+    <!-- lista para ver permisos -->
+    <ng-container *accessDirective="'asignar-paquete'">
+      <app-ver-permisos *accessDirective="'listar-permiso'"
+        title='Catalogo de Permisos'
+        class='column' 
         [initialLoad]='false'
         [canDelete]='false'
-        [(permisos)]='permisosSeleccionados' 
-        (permisoSelected)='deSelectPermiso($event)'
-        *ngIf='paqueteSeleccionado'
+        [(permisos)]='permisos' 
+        (permisoSelected)='selectPermiso($event)' 
       >
-        <button (click)='guardarPermisos()' id='guardar'>
-          Guardar
-        </button>
       </app-ver-permisos>
     </ng-container>
-    <!-- lista para ver permisos -->
-    <app-ver-permisos
-      title='Catalogo de Permisos'
-      class='column' 
-      [canDelete]='false'
-      [(permisos)]='permisos' 
-      (permisoSelected)='selectPermiso($event)' 
-    >
-    </app-ver-permisos>
   </div>
 </div>

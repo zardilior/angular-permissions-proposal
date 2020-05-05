@@ -28,7 +28,7 @@ export class AccessService {
   public constructor(
     @Inject(PermisosServiceToken) public permisosService: PermisosService,
     @Inject(KeyServiceToken) public keyService:KeyService,
-    @Inject(FailedAccessServiceToken) public failedAccess: FailedAccessService
+    @Inject(FailedAccessServiceToken) public failedAccessService: FailedAccessService
   ) {
     AccessService.service = this;
     this.keyService.keyObservable.subscribe(
@@ -43,10 +43,10 @@ export class AccessService {
   }
 
   public hasAccess(nombre) {
+    console.log(this.permisosService);
     const result = this.permisosService.getAccesoPermisos(this.key).find(
       permiso => permiso == nombre
     ) != undefined;
-    console.log(this.permisosService,this.key)
     return result;
   }
 }

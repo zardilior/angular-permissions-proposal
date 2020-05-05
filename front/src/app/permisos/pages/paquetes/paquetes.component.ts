@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PermisosService } from '../../permisos.service';
+import { AccessMethod } from 'src/app/access/access.decorator';
 
 @Component({
   selector: 'app-paquetes',
@@ -26,7 +27,15 @@ export class PaquetesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.cargarPermisos();
     this.cargarPaquetes();
+  }
+  cargarPermisos() {
+    this.service.getPermisos().subscribe(
+      permisos => {
+        this.permisos = permisos;
+      }
+    )
   }
   cargarPaquetes() {
     this.service.getPaquetes().subscribe(
@@ -69,6 +78,7 @@ export class PaquetesComponent implements OnInit {
     this.calculateDisplayPaquetes();
   }
 
+  @AccessMethod('asignar-paquete')
   selectPermiso(selected){
     if(this.paqueteSeleccionado === null)
       return;
@@ -80,6 +90,7 @@ export class PaquetesComponent implements OnInit {
       this.addPermisos.push(selected.nombre);
   }
 
+  @AccessMethod('asignar-paquete')
   deSelectPermiso(selected){
     this.moveFromArrayTo(this.permisosSeleccionados,this.permisos,selected);
     // force component reactivity by reassigning prop
