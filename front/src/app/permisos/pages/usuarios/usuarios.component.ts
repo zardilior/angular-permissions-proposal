@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PermisosService } from '../../permisos.service';
+import { AccessMethod } from 'src/app/access/access.decorator';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -65,6 +66,7 @@ export class UsuariosComponent implements OnInit {
     )
   }
 
+  @AccessMethod('asignar-permisos-usuario')
   selectPaquete(selected){
     this.moveFromArrayTo(this.paquetes,this.paquetesSeleccionados,selected);
     if (selected.permisos !==null) {
@@ -72,6 +74,7 @@ export class UsuariosComponent implements OnInit {
     }
   }
 
+  @AccessMethod('asignar-permisos-usuario')
   togglePermiso(nombre:string) {
     const findex = this.permisosUsuario.indexOf(nombre)
     if(findex === -1) {
@@ -109,6 +112,7 @@ export class UsuariosComponent implements OnInit {
     return item.nombre;
   }
 
+  @AccessMethod('asignar-permisos-usuario')
   deselectPaquete(selected){
     this.moveFromArrayTo(this.paquetesSeleccionados,this.paquetes,selected);
     selected.permisos.filter(

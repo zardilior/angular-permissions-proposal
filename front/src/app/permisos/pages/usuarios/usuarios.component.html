@@ -19,7 +19,7 @@
       </div>
     </div>
     <!-- ver permisos usuarios -->
-    <div class='permisos-usuarios column'>
+    <div class='permisos-usuarios column' *accessDirective="'listar-permisos-usuario'">
       <h3 class='title'>
         Permisos para el usuario 1
       </h3>
@@ -29,7 +29,13 @@
           <!-- header del paquete -->
           <div class='paquete-name'>
             {{paquete.categoria}} - {{paquete.nombre}}
-            <button (click)='deselectPaquete(paquete)' class='quitar-button'> Quitar todos </button>
+          <button
+            (click)='deselectPaquete(paquete)'
+            class='quitar-button'
+            *accessDirective="'mover-paquetes-permisos-usuario'"
+            >
+            Quitar todos
+          </button>
           </div>
           <!-- numero de permisos del paquete si cerrado -->
           <div class='paquete-permisos-numero' *ngIf='!paquete.abierto' >
@@ -55,12 +61,18 @@
           No hay paquetes seleccionados todavia
         </div>
       </div>
-      <button (click)='asignarPermisosUsuario()' class='guardar'>
+      <button (click)='asignarPermisosUsuario()' class='guardar' *accessDirective="'asignar-permisos-usuario'">
         Guardar
       </button>
     </div>
     <!-- ver paquetes -->
-    <app-ver-paquetes class='column' (paqueteSelected)='selectPaquete($event)' [paquetes]='paquetes'> 
-    </app-ver-paquetes>
+    <ng-container *accessDirective="'listar-permisos-usuario'">
+      <app-ver-paquetes
+        class='column'
+        [paquetes]='paquetes'
+        (paqueteSelected)='selectPaquete($event)'
+        *accessDirective="'mover-paquetes-permisos-usuario'">
+      </app-ver-paquetes>
+    </ng-container>
   </div>
 </div>

@@ -25,6 +25,7 @@ export class AppComponent {
       'asignar-permisos-usuario',
       'pagina-permisos-usuario',
       'listar-permisos-usuario',
+      'mover-paquetes-permisos-usuario',
     ]
     this.override.overridePermisos(permisos);
   }
