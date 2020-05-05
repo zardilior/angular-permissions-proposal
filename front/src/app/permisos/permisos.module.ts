@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { PermisosService } from './permisos.service';
-import { API_URL, API_URL_TOKEN } from './api-url.config'; 
 import { PermisosRoutingModule } from './permisos-routing.module'
 import { PermisosComponent } from './pages/permisos/permisos.component';
 import { PaquetesComponent } from './pages/paquetes/paquetes.component';
@@ -24,11 +22,6 @@ import { VerPaquetesComponent } from './components/ver-paquetes/ver-paquetes.com
     PermisosRoutingModule
   ],
   providers: [
-    PermisosService,
-    {
-      provide: API_URL_TOKEN,
-      useValue: API_URL 
-    }
   ],
 })
 export class PermisosModule { }

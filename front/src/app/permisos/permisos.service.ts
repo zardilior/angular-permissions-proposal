@@ -28,6 +28,9 @@ export class PermisosService /*implements FailedAccessService,PermisosService,Ke
   getPermisos(): Observable<any[]> {
     return this.httpClient.get<string[]>(this.API_URL + '/permisos/');
   }
+  getAccesoPermisos() {
+    return this.permisosUsuario;
+  }
   createPermiso(permiso:any): Observable<any>  {
     return this.httpClient.post<any>(
       this.API_URL+'/permisos/',
@@ -65,7 +68,10 @@ export class PermisosService /*implements FailedAccessService,PermisosService,Ke
   }
   loadPermisosUsuario() {
     this.getPermisosUsuario(this.userId).subscribe(
-      permisosUsuario => this.permisosUsuario = permisosUsuario 
+      permisosUsuario => {
+        this.permisosUsuario = permisosUsuario 
+        console.log(this.permisosUsuario);
+      }
     )
   }
   getPermisosAcceso(key:string): string[] {

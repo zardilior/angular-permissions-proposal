@@ -6,10 +6,13 @@ import { AppComponent } from './app.component';
 import { PermisosModule } from './permisos/permisos.module';
 import { AppRoutingModule } from './app-routing.module';
 //import { DemoModule } from './demo/demo.module';
-//import { AccessModule } from './access/access.module';
+import { AccessModule } from './access/access.module';
 import { MenuComponent } from './menu/menu.component';
-
-const API_URL = 'API_URL';
+import { PermisosServiceToken } from './access/permisos-service.interface';
+import { KeyServiceToken } from './access/key-service.interface';
+import { FailedAccessServiceToken } from './access/failed-access-service.interface';
+import { PermisosService } from './permisos/permisos.service';
+import { API_URL, API_URL_TOKEN } from './permisos/api-url.config'; 
 
 @NgModule({
   declarations: [
@@ -21,10 +24,27 @@ const API_URL = 'API_URL';
     BrowserModule,
     HttpClientModule,
     PermisosModule,
-    // AccessModule
+    AccessModule,
     // DemoModule,
   ],
   providers: [
+    PermisosService,
+    {
+      provide: API_URL_TOKEN,
+      useValue: API_URL 
+    },
+    {
+      provide: PermisosServiceToken,
+      useExisting: PermisosService 
+    },
+    {
+      provide: KeyServiceToken,
+      useExisting:  PermisosService
+    },
+    {
+      provide: FailedAccessServiceToken,
+      useExisting: PermisosService 
+    },
   ],
   bootstrap: [ AppComponent ],
   exports: [ AppRoutingModule /*, AccessModule */]

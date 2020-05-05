@@ -25,7 +25,7 @@ export class UsuariosComponent implements OnInit {
       permisos =>{
         this.permisos = permisos
         this.permisos.forEach(
-          nombre => this.permisosUsuarioDict[nombre] = false
+          ({ nombre }) => this.permisosUsuarioDict[nombre] = false
         )
         this.cargarPaquetes();
       }
@@ -168,6 +168,7 @@ export class UsuariosComponent implements OnInit {
       result => {
         this.addPermisosUsuario = [];
         this.removePermisosUsuario = [];
+        this.service.loadPermisosUsuario();
       }
     );
   }

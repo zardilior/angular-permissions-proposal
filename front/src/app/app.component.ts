@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { PermisosService } from './permisos/permisos.service' 
-  /*
 import { AccessService } from './access/access.service' 
-   */
 
 @Component({
   selector: 'app-root',
@@ -13,9 +11,8 @@ export class AppComponent {
   title = 'front';
 
   constructor(
-    private service:PermisosService //,
-    //private access:AcessService
+    private service:PermisosService,
+    private access:AccessService
   ){
-    //access.initialize(service,service,service);
   }
 }
