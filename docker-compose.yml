@@ -1,0 +1,14 @@
+version: "3"
+services:
+  mysql:
+    image: mysql:5.7
+    container_name: permisos-mysql
+    ports:
+      - 3306:3306
+    env_file: ./dev.env
+    volumes:
+      # especificamos donde queremos montar el volumen
+      - /var/lib/signot-old:/var/lib/mysql
+      # Mac OS
+      # - ~/mysql:/var/lib/mysql
+
