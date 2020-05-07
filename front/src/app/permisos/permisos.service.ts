@@ -72,7 +72,8 @@ export class PermisosService /*implements FailedAccessService,PermisosService,Ke
       permisosUsuario => {
         this.permisosUsuario = permisosUsuario 
         this.keyObservable.next('1');
-      }
+      },
+      error => alert('No se pudieron cargar los permisos. Asegurese de que su backend y db esten correctos')
     )
   }
   getPermisosAcceso(key:string): string[] {

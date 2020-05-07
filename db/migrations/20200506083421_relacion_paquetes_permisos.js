@@ -1,16 +1,16 @@
 const { 
-  PAQUETE_PERMISOS,
+  PAQUETES_PERMISOS,
   PAQUETES,
   PERMISOS,
 } = require('../databaseNames')
 exports.up = function(knex) {
-  knex.schema.createTable(PAQUETES_PERMISOS, table => {
-    table.increments('id').unsigned().index().references('id').inTable(PAQUETES);
-    table.string('nombre').usnigned().index().references('nombre').inTable(PERMISOS);
+  return knex.schema.createTable(PAQUETES_PERMISOS, table => {
+    table.integer('paquetes_permisos_id').unsigned().index().references('id').inTable(PAQUETES);
+    table.string('permisos_nombre').index().references('nombre').inTable(PERMISOS);
   });
   
 };
 
 exports.down = function(knex) {
-  knex.schema.dropTable(PAQUETES_PERMISOS);  
+  return knex.schema.dropTable(PAQUETES_PERMISOS);  
 };

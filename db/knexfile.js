@@ -3,7 +3,7 @@ const database = {
   user: 'root',
   password: 'admin',
   database: 'sdaf_propuesta_permisos',
-  port: 3600
+  port: 3306
 }
 
 module.exports = {
