@@ -15,14 +15,14 @@ export class PermisosService {
   getAll():Promise<Permiso[]> {
     return this.db.query(`SELECT * FROM permisos`);
   }
-  async create(permiso:Permiso) {
+  async create(permiso:Permiso): Promise<Permiso> {
     const result = await this.db.query(`Insert into permisos values(?, ?)`,[
       permiso.nombre,
       permiso.nombre_mostrable
     ]);
     return permiso;
   }
-  delete(nombre:string) {
+  delete(nombre:string):Promise<any> {
     return this.db.query(`DELETE FROM permisos WHERE nombre = ?`,[
       nombre,
     ]);

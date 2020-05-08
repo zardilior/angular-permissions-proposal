@@ -43,7 +43,6 @@ export class AccessService {
   }
 
   public hasAccess(nombre) {
-    console.log(this.permisosService);
     const result = this.permisosService.getAccesoPermisos(this.key).find(
       permiso => permiso == nombre
     ) != undefined;

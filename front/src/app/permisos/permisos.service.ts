@@ -60,7 +60,7 @@ export class PermisosService /*implements FailedAccessService,PermisosService,Ke
 
   asignarPermisosPaquetes(id:number,add:any[],remove:any[]): Observable<any> {
     return this.httpClient.post<any>(
-      `${this.API_URL}/permisos-paquetes/${id}`,
+      `${this.API_URL}/paquetes/${id}/permisos`,
       {
         add,
         remove
@@ -80,7 +80,7 @@ export class PermisosService /*implements FailedAccessService,PermisosService,Ke
     return this.permisosUsuario;
   }
   getPermisosUsuario(id:number): Observable<string[]> {
-    return this.httpClient.get<string[]>(`${this.API_URL}/permisos-usuarios/${id}`);
+    return this.httpClient.get<string[]>(`${this.API_URL}/usuarios/${id}/permisos`);
   }
   failedAccess(nombre:string):void {
     console.log('Acceso restringido fallo permiso: ' + nombre);
@@ -88,7 +88,7 @@ export class PermisosService /*implements FailedAccessService,PermisosService,Ke
 
   asignarPermisosUsuario(id:number,add:any[],remove:any[]): Observable<any> {
     return this.httpClient.post<any>(
-      `${this.API_URL}/permisos-usuarios/${id}`,
+      `${this.API_URL}/usuarios/${id}/permisos`,
       {
         add,
         remove

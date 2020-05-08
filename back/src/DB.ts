@@ -34,7 +34,7 @@ export async function DBFactory(): Promise<mysql.Pool>{
 
     return pool;
   } catch (e) {
-    console.log('Error en la configuación: ');
-    console.log(e);
+    console.error('Error en la configuación: ');
+    console.error(e);
   }
 }

@@ -7,6 +7,7 @@ import {
   UsePipes,
   Body,
   Param,
+  HttpCode,
 } from '@nestjs/common';
 import { PaquetesService } from './paquetes.service';
 import { Paquete } from './paquetes.class';
@@ -29,7 +30,20 @@ export class PaquetesController {
     return this.service.create(paquetes)  
   }
   @Delete('/:id')
-  remove(@Param('id') id:number) {
-    return this.service.remove(id)  
+  async remove(@Param('id') id:number) {
+    await this.service.remove(id)  
+  }
+
+  @Post('/:idPaquete/permisos')
+  @HttpCode(204)
+  async replacePermisos(
+    @Param('idPaquete') id: number,
+    @Body('add') addPermisos:string[] =[],
+    @Body('remove') removePermisos:string[]=[]
+  ):Promise<void>{
+    await Promise.all([
+      this.service.removePermisos(id,removePermisos),
+      this.service.addPermisos(id, addPermisos),
+    ])
   }
 }

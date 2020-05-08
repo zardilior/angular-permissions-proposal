@@ -1,6 +1,7 @@
 import { 
   Injectable,
   Inject,
+  HttpCode,
 } from '@nestjs/common';
 // DB
 import { Pool } from 'mysql';
@@ -38,5 +39,31 @@ export class PaquetesService {
     return this.db.query(`DELETE FROM paquetes_permisos WHERE id = ?`,[
       id,
     ]);
+  }
+
+  addPermisos(id:number, permisos:string[]){
+    if(permisos.length === 0)
+      return;
+    const values = permisos.map(
+      permiso => [id, permiso]
+    )
+    return this.db.query(
+      `insert into relacion_paquetes_permisos(paquetes_permisos_id,permisos_nombre) values ?`, [ values ]
+    );
+  }
+
+  removePermisos(id:number, permisos:string[]){
+    if(permisos.length === 0)
+      return;
+    return this.db.query(
+      `
+        delete from relacion_paquetes_permisos 
+        where paquetes_permisos_id=? and permisos_nombre in (?)
+      `,
+      [
+        id,
+        permisos
+      ]
+    );
   }
 }
