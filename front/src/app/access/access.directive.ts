@@ -13,6 +13,7 @@ export class AccessDirective {
   ) { }
   @Input() set accessDirective(nombre: string) {
     const shouldShow = () => {
+      console.log(this.accessService.getPermisos());
       if (this.accessService.hasAccess(nombre)){
         this.viewContainer.clear()
         this.viewContainer.createEmbeddedView(
@@ -25,7 +26,7 @@ export class AccessDirective {
         this.hasView = false;
       }
     }
-    this.accessService.keyService.keyObservable.subscribe(shouldShow);
+    this.accessService.getPermisosChanges().subscribe(shouldShow);
     shouldShow()
   }
 

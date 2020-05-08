@@ -33,18 +33,6 @@ import { API_URL, API_URL_TOKEN } from './permisos/api-url.config';
       provide: API_URL_TOKEN,
       useValue: API_URL 
     },
-    {
-      provide: PermisosServiceToken,
-      useExisting: PermisosService 
-    },
-    {
-      provide: KeyServiceToken,
-      useExisting:  PermisosService
-    },
-    {
-      provide: FailedAccessServiceToken,
-      useExisting: PermisosService 
-    },
   ],
   bootstrap: [ AppComponent ],
   exports: [ AppRoutingModule , AccessModule ]

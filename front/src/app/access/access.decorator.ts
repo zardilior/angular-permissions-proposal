@@ -1,19 +1,13 @@
 import { AccessService } from './access.service';
-import { FailedAccessService } from './failed-access-service.interface';
 
-export function AccessMethod(nombre){
+export function AccessMethod(nombre: string){
   return function (target, propertyKey, descriptor) {
     const newFunc = descriptor.value;
     descriptor.value = function(...args: any[]) {
-      // inject services
+      // get service
       const accessService:AccessService = AccessService.getService();
-      const accesoFallidoService:FailedAccessService = accessService.failedAccessService;
-      // throw don't access error
-      if (!accessService.hasAccess(nombre)){
-        accesoFallidoService.failedAccess(nombre)
-        return undefined
-      }
-      else {
+      // only execute if it has access
+      if (accessService.hasAccess(nombre)){
         return newFunc.apply(this, args);
       }
     }
@@ -21,7 +15,7 @@ export function AccessMethod(nombre){
 }
 
 // block all methods in a class in the way the AccessMethod does
-export function AccessAllMethods(nombre){
+export function AccessAllMethods(nombre: string){
   return function <T extends { new(...args: any[]): {} }>(target: T) {
     return class extends target {
       constructor(...args) {
@@ -33,14 +27,10 @@ export function AccessAllMethods(nombre){
               continue;
           const newFunc = descriptor.value;
           descriptor.value = function(...args: any[]) {
+            // get service
             const accessService:AccessService = AccessService.getService();
-            const accesoFallidoService:FailedAccessService = accessService.failedAccessService;
-            // throw don't access error
-            if (!accessService.hasAccess(nombre)){
-              accesoFallidoService.failedAccess(nombre)
-              return undefined
-            }
-            else {
+            // only execute if it has access
+            if (accessService.hasAccess(nombre)){
               return newFunc.apply(this, args);
             }
           }

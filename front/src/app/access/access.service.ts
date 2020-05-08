@@ -2,50 +2,57 @@ import {
   Injectable,
   Inject 
 } from '@angular/core';
-import { Observable } from 'rxjs';
 import {
-  FailedAccessService,
-  FailedAccessServiceToken
-} from './failed-access-service.interface';
-import {
-  PermisosService,
-  PermisosServiceToken 
-} from './permisos-service.interface';
-import { 
-  KeyService,
-  KeyServiceToken
-} from './key-service.interface';
-
+  Router,
+  CanActivate, ActivatedRouteSnapshot 
+} from '@angular/router';
+import { Observable, Subject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class AccessService {
+export class AccessService implements CanActivate {
 
-  private static service = undefined;
-  private keySubscription:Observable<string>;
-  private key:string;
+  private static service: AccessService;
+  private permisos:string[];
+  private permisosChanges:Subject<string[]> = new Subject<string[]>();
 
   public constructor(
-    @Inject(PermisosServiceToken) public permisosService: PermisosService,
-    @Inject(KeyServiceToken) public keyService:KeyService,
-    @Inject(FailedAccessServiceToken) public failedAccessService: FailedAccessService
+    private router: Router
   ) {
+    this.permisos = [];
     AccessService.service = this;
-    this.keyService.keyObservable.subscribe(
-      key => this.key = key
-    );
   }
-  public static getService() {
-     if(!AccessService.service) {
+
+  public static getService(): AccessService {
+     if(AccessService.service === undefined) {
          throw new Error('AccessService not initialized');
      }
      return AccessService.service;
   }
 
-  public hasAccess(nombre) {
-    const result = this.permisosService.getAccesoPermisos(this.key).find(
+  public setPermisos(permisos: string[]): void {
+    this.permisos = permisos;
+    this.permisosChanges.next(permisos);
+  }
+  public getPermisosChanges(): Subject<string[]> {
+    return this.permisosChanges;
+  }
+  public getPermisos(): string[] {
+    return this.permisos;
+  }
+
+  public hasAccess(nombre):boolean {
+    const result = this.permisos.find(
       permiso => permiso == nombre
     ) != undefined;
     return result;
+  }
+  canActivate(route:ActivatedRouteSnapshot): boolean {
+    const nombre = route.data.access
+    if (!this.hasAccess(nombre)) {
+      this.router.navigate(['']);
+      return false;
+    }
+    return true;
   }
 }

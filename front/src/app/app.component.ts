@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { PermisosService } from './permisos/permisos.service' 
 import { AccessService } from './access/access.service' 
-import { OverridePermisosService } from './override-permisos.service' 
 
 @Component({
   selector: 'app-root',
@@ -14,19 +13,25 @@ export class AppComponent {
   constructor(
     private access:AccessService,
     private permisos:PermisosService,
-    private override:OverridePermisosService
   ){
+    this.recargarPermisos();
   }
   recargarPermisos() {
-    this.permisos.loadPermisosUsuario();
+    this.permisos.getPermisosUsuario(1).subscribe(
+      permisosUsuario => {
+        console.log(permisosUsuario);
+        this.access.setPermisos(permisosUsuario)
+      },
+      error => alert('No se pudieron cargar los permisos. Asegurese de que su backend y db esten correctos')
+    )
   }
   overridePermisos(){
-    const permisos = [
+    const permisos = this.access.getPermisos().concat([
       'asignar-permisos-usuario',
       'pagina-permisos-usuario',
       'listar-permisos-usuario',
-      'mover-paquetes-permisos-usuario',
-    ]
-    this.override.overridePermisos(permisos);
+      'mover-paquetes-permisos-usuario'
+    ]);
+    this.access.setPermisos(permisos);
   }
 }

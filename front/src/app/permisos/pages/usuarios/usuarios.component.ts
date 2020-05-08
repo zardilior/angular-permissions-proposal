@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PermisosService } from '../../permisos.service';
 import { AccessMethod } from 'src/app/access/access.decorator';
+import { AccessService } from 'src/app/access/access.service';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -18,7 +19,8 @@ export class UsuariosComponent implements OnInit {
   addPermisosUsuario:string[] = [];
   removePermisosUsuario:string[] = [];
   constructor(
-    private service:PermisosService
+    private service:PermisosService,
+    private access:AccessService
   ) { }
 
   ngOnInit(): void {
@@ -172,9 +174,17 @@ export class UsuariosComponent implements OnInit {
       result => {
         this.addPermisosUsuario = [];
         this.removePermisosUsuario = [];
-        this.service.loadPermisosUsuario();
+        this.recargarPermisos();
       }
     );
+  }
+  recargarPermisos():void {
+    this.service.getPermisosUsuario(1).subscribe(
+      permisosUsuario => {
+        this.access.setPermisos(permisosUsuario)
+      },
+      error => alert('No se pudieron cargar los permisos. Asegurese de que su backend y db esten correctos')
+    )
   }
 
 }
