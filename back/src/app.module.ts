@@ -6,6 +6,7 @@ import { PermisosService } from './permisos/permisos.service';
 import { PaquetesController } from './paquetes/paquetes.controller';
 import { UsersController } from './users/users.controller';
 import { UsersService } from './users/users.service';
+import { ZipkinLoggerService } from './zipkin-logger/zipkin-logger.service';
 
 @Module({
   imports: [],
@@ -21,7 +22,8 @@ import { UsersService } from './users/users.service';
       useFactory: DBFactory
     },
     PaquetesService,
-    UsersService
+    UsersService,
+    ZipkinLoggerService
   ],
 })
 export class AppModule {}
