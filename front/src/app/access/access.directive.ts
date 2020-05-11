@@ -13,7 +13,6 @@ export class AccessDirective {
   ) { }
   @Input() set accessDirective(nombre: string) {
     const shouldShow = () => {
-      console.log(this.accessService.getPermisos());
       if (this.accessService.hasAccess(nombre)){
         this.viewContainer.clear()
         this.viewContainer.createEmbeddedView(
