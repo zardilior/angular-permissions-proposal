@@ -7,6 +7,7 @@ import { PaquetesComponent } from './pages/paquetes/paquetes.component';
 import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 import { VerPermisosComponent } from './components/ver-permisos/ver-permisos.component';
 import { VerPaquetesComponent } from './components/ver-paquetes/ver-paquetes.component';
+import { AccessModule } from 'src/app/access/access.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { VerPaquetesComponent } from './components/ver-paquetes/ver-paquetes.com
   imports: [
     CommonModule,
     FormsModule,
-    PermisosRoutingModule
+    PermisosRoutingModule,
+    AccessModule
   ],
   providers: [
   ],

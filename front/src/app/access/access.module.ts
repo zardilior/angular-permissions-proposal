@@ -11,7 +11,6 @@ import { AccessDirective } from './access.directive';
     CommonModule
   ],
   providers: [
-    AccessService
   ],
   exports: [
     AccessDirective
