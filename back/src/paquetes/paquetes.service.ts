@@ -2,17 +2,21 @@ import {
   Injectable,
   Inject,
   HttpCode,
+  Logger,
 } from '@nestjs/common';
 // DB
 import { Pool } from 'mysql';
 import { Paquete } from './paquetes.class';
+import { Traceable, Trace } from 'src/decorators/trace-everything.decorator';
 
 @Injectable()
 export class PaquetesService {
+  private logger = new Logger(PaquetesService.name)
   constructor(
-    @Inject('DB') private db: Pool
+    @Inject('DB') private db: Pool,
   ){}
 
+  @Trace
   getAll():Promise<Paquete[]> {
     return this.db.query(
       `
@@ -25,6 +29,7 @@ export class PaquetesService {
       `
     );
   }
+  @Trace
   async create(paquete:Paquete) {
     const result = await this.db.query(
       `Insert into paquetes_permisos(nombre,categoria) values(?, ?)`,[
@@ -35,12 +40,14 @@ export class PaquetesService {
     return paquete;
   }
 
+  @Trace
   remove(id: number) {
     return this.db.query(`DELETE FROM paquetes_permisos WHERE id = ?`,[
       id,
     ]);
   }
 
+  @Trace
   addPermisos(id:number, permisos:string[]){
     if(permisos.length === 0)
       return;
@@ -52,6 +59,7 @@ export class PaquetesService {
     );
   }
 
+  @Trace
   removePermisos(id:number, permisos:string[]){
     if(permisos.length === 0)
       return;

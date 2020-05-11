@@ -8,34 +8,41 @@ import {
   Body,
   Param,
   HttpCode,
+  Logger,
 } from '@nestjs/common';
 import { PaquetesService } from './paquetes.service';
 import { Paquete } from './paquetes.class';
-
+import { Traceable, Trace } from 'src/decorators/trace-everything.decorator';
 
 @Controller('paquetes')
 @UsePipes(new ValidationPipe())
+@Traceable
 export class PaquetesController {
+
   constructor(
     private service: PaquetesService
   ){
   }
 
   @Get('/')
+  @Trace
   getAll(): Promise<Paquete[]> {
     return this.service.getAll()  
   }
   @Post('/')
+  @Trace
   create(@Body() paquetes:Paquete) {
     return this.service.create(paquetes)  
   }
-  @Delete('/:id')
-  async remove(@Param('id') id:number) {
+  @Delete('/:idPaquete')
+  @Trace
+  async remove(@Param('idPaquete') id:number) {
     await this.service.remove(id)  
   }
 
   @Post('/:idPaquete/permisos')
   @HttpCode(204)
+  @Trace
   async replacePermisos(
     @Param('idPaquete') id: number,
     @Body('add') addPermisos:string[] =[],
