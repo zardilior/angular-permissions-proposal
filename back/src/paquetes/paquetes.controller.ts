@@ -15,7 +15,7 @@ import { Paquete } from './paquetes.class';
 import { Traceable, Trace } from 'src/decorators/trace-everything.decorator';
 
 @Controller('paquetes')
-//@UsePipes(new ValidationPipe())
+@UsePipes(new ValidationPipe())
 export class PaquetesController {
   private logger = new Logger(PaquetesController.name);
 
@@ -27,13 +27,14 @@ export class PaquetesController {
 
   @Post('/')
   @Trace
-  create(@Body() paquetes) {
+  create(@Body() paquetes:Paquete) {
     return this.service.create(paquetes)  
   }
 
   @Get('/')
   @Trace
   getAll(): Promise<Paquete[]> {
+    this.logger.log('Hola carlos');
     return this.service.getAll()  
   }
 

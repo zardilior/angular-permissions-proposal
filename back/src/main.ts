@@ -9,12 +9,17 @@ async function bootstrap() {
     logger: false,
     bodyParser: false,
   });
+
   const zipkinLogger = new ZipkinLoggerService()
+
   app.useLogger(zipkinLogger);
   app.enableCors();
+
   const tracer = zipkinLogger.tracer;
+
   app.use(bodyParser.json());
   app.use(zipkinMiddleware({ tracer }))
+
   await app.listen(3000);
 }
 bootstrap();
