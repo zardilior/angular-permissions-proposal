@@ -11,10 +11,11 @@ import { Traceable, Trace } from 'src/decorators/trace-everything.decorator';
 
 @Injectable()
 export class PaquetesService {
-  private logger = new Logger(PaquetesService.name)
+  private logger = new Logger(PaquetesService.name);
   constructor(
     @Inject('DB') private db: Pool,
-  ){}
+  ){
+  }
 
   @Trace
   getAll():Promise<Paquete[]> {
@@ -29,6 +30,7 @@ export class PaquetesService {
       `
     );
   }
+
   @Trace
   async create(paquete:Paquete) {
     const result = await this.db.query(

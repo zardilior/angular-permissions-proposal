@@ -16,12 +16,19 @@ import { Traceable, Trace } from 'src/decorators/trace-everything.decorator';
 
 @Controller('paquetes')
 @UsePipes(new ValidationPipe())
-@Traceable
 export class PaquetesController {
+  private logger = new Logger(PaquetesController.name);
 
   constructor(
     private service: PaquetesService
   ){
+  }
+
+
+  @Post('/')
+  @Trace
+  create(@Body() paquetes:Paquete) {
+    return this.service.create(paquetes)  
   }
 
   @Get('/')
@@ -29,26 +36,22 @@ export class PaquetesController {
   getAll(): Promise<Paquete[]> {
     return this.service.getAll()  
   }
-  @Post('/')
-  @Trace
-  create(@Body() paquetes:Paquete) {
-    return this.service.create(paquetes)  
-  }
+
   @Delete('/:idPaquete')
   @Trace
-  async remove(@Param('idPaquete') id:number) {
-    await this.service.remove(id)  
+  remove(@Param('idPaquete') id:number) {
+    this.service.remove(id)  
   }
 
   @Post('/:idPaquete/permisos')
   @HttpCode(204)
   @Trace
-  async replacePermisos(
+  replacePermisos(
     @Param('idPaquete') id: number,
     @Body('add') addPermisos:string[] =[],
     @Body('remove') removePermisos:string[]=[]
   ):Promise<void>{
-    await Promise.all([
+    return Promise.all([
       this.service.removePermisos(id,removePermisos),
       this.service.addPermisos(id, addPermisos),
     ])

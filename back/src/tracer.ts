@@ -4,9 +4,8 @@ import {
   jsonEncoder
 } from 'zipkin';
 
-const CLSContext = require('zipkin-context-cls');
-const { HttpLogger } = require('zipkin-transport-http');
-const zipkinMiddleware = require('zipkin-instrumentation-express').expressMiddleware;
+import { CLSContext } from 'src/CLSContext';
+import { HttpLogger } from 'zipkin-transport-http';
 
 export const tracer = new Tracer({
   ctxImpl: new CLSContext(),
