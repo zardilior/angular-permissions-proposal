@@ -34,13 +34,14 @@ export class PaquetesController {
   @Get('/')
   @Trace
   getAll(): Promise<Paquete[]> {
+    this.logger.log('Hola carlos');
     return this.service.getAll()  
   }
 
   @Delete('/:idPaquete')
   @Trace
   remove(@Param('idPaquete') id:number) {
-    this.service.remove(id)  
+    return this.service.remove(id)  
   }
 
   @Post('/:idPaquete/permisos')

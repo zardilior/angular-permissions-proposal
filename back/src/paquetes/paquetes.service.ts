@@ -32,14 +32,14 @@ export class PaquetesService {
   }
 
   @Trace
-  async create(paquete:Paquete) {
+  async create(paquete:Omit<Paquete,'id'>) {
     const result = await this.db.query(
       `Insert into paquetes_permisos(nombre,categoria) values(?, ?)`,[
       paquete.nombre,
       paquete.categoria
     ]);
-    paquete.id = result.insertId;
-    return paquete;
+    const p = { id:result.insertId, ...paquete } ;
+    return p;
   }
 
   @Trace
