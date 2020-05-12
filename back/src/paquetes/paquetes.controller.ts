@@ -12,7 +12,7 @@ import {
 } from '@nestjs/common';
 import { PaquetesService } from './paquetes.service';
 import { Paquete } from './paquetes.class';
-import { Traceable, Trace } from 'src/decorators/trace-everything.decorator';
+import { Trace } from 'src/decorators/trace-everything.decorator';
 
 @Controller('paquetes')
 @UsePipes(new ValidationPipe())

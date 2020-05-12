@@ -1,16 +1,20 @@
 import { 
   Injectable,
   Inject,
+  Logger
 } from '@nestjs/common';
 // DB
 import { Pool } from 'mysql';
+import { Trace } from 'src/decorators/trace-everything.decorator';
 
 @Injectable()
 export class UsersService {
+  private logger = new Logger(UsersService.name);
   constructor(
     @Inject('DB') private db: Pool
   ){}
 
+  @Trace
   getAll():Promise<any[]> {
     return this.db.query(`SELECT * FROM users`);
   }
@@ -26,6 +30,7 @@ export class UsersService {
     return result.map(({ permisos_nombre }) => permisos_nombre);
   }
 
+  @Trace
   addPermisos(id:number, permisos:string[]){
     if(permisos.length === 0)
       return;
@@ -37,6 +42,7 @@ export class UsersService {
     );
   }
 
+  @Trace
   removePermisos(id:number, permisos:string[]){
     if(permisos.length === 0)
       return;
