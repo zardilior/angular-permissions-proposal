@@ -15,7 +15,7 @@ import { Paquete } from './paquetes.class';
 import { Traceable, Trace } from 'src/decorators/trace-everything.decorator';
 
 @Controller('paquetes')
-@UsePipes(new ValidationPipe())
+//@UsePipes(new ValidationPipe())
 export class PaquetesController {
   private logger = new Logger(PaquetesController.name);
 
@@ -27,7 +27,7 @@ export class PaquetesController {
 
   @Post('/')
   @Trace
-  create(@Body() paquetes:Paquete) {
+  create(@Body() paquetes) {
     return this.service.create(paquetes)  
   }
 
@@ -40,7 +40,7 @@ export class PaquetesController {
   @Delete('/:idPaquete')
   @Trace
   remove(@Param('idPaquete') id:number) {
-    this.service.remove(id)  
+    return this.service.remove(id)  
   }
 
   @Post('/:idPaquete/permisos')
@@ -50,7 +50,7 @@ export class PaquetesController {
     @Param('idPaquete') id: number,
     @Body('add') addPermisos:string[] =[],
     @Body('remove') removePermisos:string[]=[]
-  ):Promise<void>{
+  ) {
     return Promise.all([
       this.service.removePermisos(id,removePermisos),
       this.service.addPermisos(id, addPermisos),
