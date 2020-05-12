@@ -1,4 +1,23 @@
-# Propuesta de permisos
+# Propuesta de permisos (BRANCH_SPECIFIC)
+
+## Objetivo del Branch
+Este branch en particular implementa instrumentacion con zipkin: 
+
+Para correr un servidor de zipkin local y no configurar nada:
+sudo docker run -d -p 9411:9411 openzipkin/zipkin
+
+Una vez hecho esto se puede acceder a:
+localhost:9411/zipkin
+para ver el ui de zipkin y buscar para ver todos los ultimos requests
+
+Nota: el ui de zipkin requiere search para mostrar muestra los ultimos no se updetea y su orden default no es cronologico asi que queda picarle a la columna de start time para verlos asi
+
+Lo que se encuentra instrumentado por el momento son los controladores y servicios y la entrada y salida del request
+
+### Posibles Mejoras
+Agregar zipkin-instrumentation-mysql2
+
+# Propuesta de permisos (ORIGINAL)
 
 ## Objetivo
 Como parte de la exploracion de una segunda version en angular9 + nestjs para Signot, se hizo un demo para plantear una propuesta del sistema de permisos.
