@@ -46,12 +46,12 @@ export class PaquetesController {
   @Post('/:idPaquete/permisos')
   @HttpCode(204)
   @Trace
-  replacePermisos(
+  async replacePermisos(
     @Param('idPaquete') id: number,
     @Body('add') addPermisos:string[] =[],
     @Body('remove') removePermisos:string[]=[]
   ):Promise<void>{
-    return Promise.all([
+    await Promise.all([
       this.service.removePermisos(id,removePermisos),
       this.service.addPermisos(id, addPermisos),
     ])
