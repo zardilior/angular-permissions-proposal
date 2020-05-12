@@ -1,13 +1,12 @@
 import { 
   Injectable,
   Inject,
-  HttpCode,
   Logger,
 } from '@nestjs/common';
 // DB
 import { Pool } from 'mysql';
 import { Paquete } from './paquetes.class';
-import { Traceable, Trace } from 'src/decorators/trace-everything.decorator';
+import { Trace } from 'src/decorators/trace-everything.decorator';
 
 @Injectable()
 export class PaquetesService {

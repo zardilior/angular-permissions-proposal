@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ZipkinLoggerService } from './zipkin-logger/zipkin-logger.service';
-var bodyParser = require('body-parser')
+const bodyParser = require('body-parser')
 const zipkinMiddleware = require('zipkin-instrumentation-express').expressMiddleware;
 
 async function bootstrap() {

@@ -6,7 +6,6 @@ export const Traceable =  function<T extends { new(...args: any[]): {} }>(target
     private logger: Logger;
     constructor(...args) {
       super(...args);
-      const name = super.constructor.name;
       this.logger = new Logger();
     }
   }

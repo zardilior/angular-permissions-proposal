@@ -22,7 +22,7 @@ export class PermisosService {
 
   @Trace
   async create(permiso:Permiso): Promise<Permiso> {
-    const result = await this.db.query(`Insert into permisos values(?, ?)`,[
+    await this.db.query(`Insert into permisos values(?, ?)`,[
       permiso.nombre,
       permiso.nombre_mostrable
     ]);

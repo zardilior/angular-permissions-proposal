@@ -2,7 +2,7 @@ import {
   Tracer,
   BatchRecorder,
   jsonEncoder,
-  ConsoleRecorder,
+  //  ConsoleRecorder,
 } from 'zipkin';
 
 import { CLSContext } from 'src/CLSContext';

@@ -1,8 +1,9 @@
-const { promisify } = require('util');
+import { promisify } from 'util';
 import * as mysql from 'mysql';
-const { database } = require('./keys');
-const pool = mysql.createPool(database);
+import { database } from './keys';
 const CONNECTION_LIMIT = 10;
+const config = {...database, pool:CONNECTION_LIMIT };
+const pool = mysql.createPool(config);
 
 export async function DBFactory(): Promise<mysql.Pool>{
   try {

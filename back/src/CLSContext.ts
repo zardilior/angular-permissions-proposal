@@ -1,4 +1,4 @@
-const {createNamespace, getNamespace} = require('cls-hooked');
+import  { createNamespace, getNamespace } from 'cls-hooked';
 
 export class CLSContext {
   private _session:any;
