@@ -1,5 +1,5 @@
 import { promisify } from 'util';
-import * as mysql from 'mysql';
+import * as mysql from 'mysql2';
 import { database } from './keys';
 const CONNECTION_LIMIT = 10;
 const config = {...database, pool:CONNECTION_LIMIT };

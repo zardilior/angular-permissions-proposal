@@ -4,7 +4,7 @@ import {
   Logger
 } from '@nestjs/common';
 // DB
-import { Pool } from 'mysql';
+import { Pool } from 'mysql2';
 import { Trace } from 'src/decorators/trace-everything.decorator';
 
 @Injectable()

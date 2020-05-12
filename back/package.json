@@ -27,13 +27,13 @@
     "class-transformer": "^0.2.3",
     "class-validator": "^0.12.2",
     "cls-hooked": "^4.2.2",
-    "mysql": "^2.18.1",
+    "mysql2": "^2.1.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^6.5.4",
     "zipkin": "^0.21.0",
-    "zipkin-context-cls": "^0.21.0",
     "zipkin-instrumentation-express": "^0.21.0",
+    "zipkin-instrumentation-mysql2": "^1.0.1",
     "zipkin-transport-http": "^0.21.0"
   },
   "devDependencies": {
