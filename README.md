@@ -68,7 +68,7 @@ Como parte de la exploracion de una segunda version en angular9 + nestjs para Si
   - @angular/cli
 
   Para la Base de datos
-  ```
+  ```shell
   // levanta la bd
   sudo docker run --name signot-permisos-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=admin -e MYSQL_DATABASE=sdaf_propuesta_permisos -d mysql:5.7
   cd db
@@ -80,7 +80,7 @@ Como parte de la exploracion de una segunda version en angular9 + nestjs para Si
 
   Para el backend
 
-  ```
+  ```shell
   cd back
   yarn install
   npm start
@@ -88,7 +88,7 @@ Como parte de la exploracion de una segunda version en angular9 + nestjs para Si
 
   Para el frontend
 
-  ```
+  ```shell
   cd front 
   npm install
   ng serve
