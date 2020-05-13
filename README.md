@@ -4,10 +4,14 @@
 Este branch en particular implementa instrumentacion con zipkin: 
 
 Para correr un servidor de zipkin local y no configurar nada:
+```shell
 sudo docker run -d -p 9411:9411 openzipkin/zipkin
+```
 
 Una vez hecho esto se puede acceder a:
+
 localhost:9411/zipkin
+
 para ver el ui de zipkin y buscar para ver todos los ultimos requests
 
 Nota: el ui de zipkin requiere search para mostrar muestra los ultimos no se updetea y su orden default no es cronologico asi que queda picarle a la columna de start time para verlos asi
@@ -15,9 +19,10 @@ Nota: el ui de zipkin requiere search para mostrar muestra los ultimos no se upd
 Lo que se encuentra instrumentado por el momento son los controladores y servicios y la entrada y salida del request
 
 ### Posibles Mejoras
-Agregar zipkin-instrumentation-mysql2
+- Pasar argumentos a anotaciones
 
 # Propuesta de permisos (ORIGINAL)
+# Propuesta de permisos
 
 ## Objetivo
 Como parte de la exploracion de una segunda version en angular9 + nestjs para Signot, se hizo un demo para plantear una propuesta del sistema de permisos.
@@ -30,7 +35,7 @@ Como parte de la exploracion de una segunda version en angular9 + nestjs para Si
 
   En base a esto:
 
-  Se propone un sistema de permisos en el cual cada elemento, sea un metodo, endpoint, boton y/o elemento visual, pueda ser relacionado con un permiso. Estos permisos a la vez se pondrian en paquetes para simular la parte de roles pero extendiendo el sistema al: 
+  Se propone un sistema de permisos en el cual cada elemento, sea un metodo, endpoint, boton y/o elemento visual, pueda ser relacionado con un permiso. Estos permisos a la vez se pondrian en paquetes para simular la parte de roles pero extendiendo el sistema al:
   - permitir un manejo central de los permisos y paquetes
   - permitir dar acceso a paquetes de permisos adicionales si el equipo de signot asi lo desea
   - permitir relacionar facilmente cualquier elemento con un permiso
@@ -54,7 +59,7 @@ Como parte de la exploracion de una segunda version en angular9 + nestjs para Si
 
   Este demo a nivel datos:
   - Usuarios - pueden tener permisos asignados, por ahora se maneja solo el usuario1 que eres tu
-  - Paquetes - contienen a los permisos pero no tienen relacion directa con los usuarios de momento, podria darse para bloquear grupos de permisos completos 
+  - Paquetes - contienen a los permisos pero no tienen relacion directa con los usuarios de momento, podria darse para bloquear grupos de permisos completos
   - Permisos - son los permisos a los que se relacionan los elementos en la aplicacion y sona asignados a usuarios y paquetes
 
 ## Como hacer el setup
@@ -67,39 +72,40 @@ Como parte de la exploracion de una segunda version en angular9 + nestjs para Si
   - knex
   - @angular/cli
 
+  Script de instalacion
+  ```shell
+  npm install -g npm
+  npm install -g yarn
+  npm install -g knex
+  npm install -g @angular/cli
+  ```
+
   Para la Base de datos
-
-  // levanta la bd
-
+  ```shell
+  # levanta la bd
   sudo docker run --name signot-permisos-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=admin -e MYSQL_DATABASE=sdaf_propuesta_permisos -d mysql:5.7
-
   cd db
-
-  // migra la estructura de la base de datos
-
-  knex migration:latest 
-
-  // inserta los registros iniciales/seeds
-
+  # migra la estructura de la base de datos
+  knex migration:latest
+  # inserta los registros iniciales/seeds
   knex seed:run
-
+  ```
 
   Para el backend
 
+  ```shell
   cd back
-
   yarn install
-
   npm start
-
+  ```
 
   Para el frontend
 
-  cd front 
-
+  ```shell
+  cd front
   npm install
-
   ng serve
+  ```
 
 ## Guia del demo
 
@@ -131,3 +137,4 @@ El frontend, que es el unico con restricciones maneja en el modulo de accesos:
   - Separar la parte de accesos como una libreria aparte
   - Agregar un modulo demo para mostrar los permisos en otros casos
   - Rearquitecturar para separar y eliminar la llave y solo permitir el loading de permisos para simplificar el modulo de acceso
+
