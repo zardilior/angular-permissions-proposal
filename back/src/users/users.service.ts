@@ -18,6 +18,8 @@ export class UsersService {
   getAll():Promise<any[]> {
     return this.db.query(`SELECT * FROM users`);
   }
+
+  @Trace
   async getPermisosByUserId(userId: number): Promise<string[]> {
     const [rows,fields] = await this.db.query(
       `
