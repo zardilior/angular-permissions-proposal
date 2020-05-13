@@ -62,28 +62,43 @@ Como parte de la exploracion de una segunda version en angular9 + nestjs para Si
   Se requiere hacer el setup del backend, de la bd de mysql y correr el frontend
 
   Para facilitar el trabajo se debe instalar:
-  npm
-  yarn
-  knex
-  @angular/cli
+  - npm
+  - yarn
+  - knex
+  - @angular/cli
 
   Para la Base de datos
+
   // levanta la bd
+
   sudo docker run --name signot-permisos-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=admin -e MYSQL_DATABASE=sdaf_propuesta_permisos -d mysql:5.7
+
   cd db
+
   // migra la estructura de la base de datos
+
   knex migration:latest 
+
   // inserta los registros iniciales/seeds
+
   knex seed:run
 
+
   Para el backend
+
   cd back
+
   yarn install
+
   npm start
 
+
   Para el frontend
+
   cd front 
+
   npm install
+
   ng serve
 
 ## Guia del demo
