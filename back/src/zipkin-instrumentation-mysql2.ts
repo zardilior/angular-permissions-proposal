@@ -7,7 +7,8 @@ function zipkinClient(tracer, Mysql, config, serviceName = tracer.localEndpoint.
     tracer.letId(id, () => {
       tracer.recordAnnotation(new Annotation.ClientSend());
       tracer.recordServiceName(remoteServiceName);
-      tracer.recordMessage(`Query: ${sql} , Values: ${values}`);
+      tracer.recordBinary('Query',`${sql}`);
+      tracer.recordBinary('Values',`${JSON.stringify(values)}`);
       tracer.recordRpc(`query ${this.pool.config.connectionConfig.database}`);
     });
 

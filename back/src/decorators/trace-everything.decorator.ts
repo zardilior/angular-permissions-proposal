@@ -28,7 +28,8 @@ export const Trace = function(target:any, propertyName: string, descriptor: Prop
     tracer.letId(id, ()=>{
       tracer.recordAnnotation(new Annotation.ClientSend());
       tracer.recordServiceName(message.className);
-      tracer.recordRpc(`${message.functionName}(${JSON.stringify(args)})`);
+      tracer.recordRpc(`Function: ${message.functionName}`);
+      tracer.recordBinary('args', JSON.stringify(args));
       result = newFunc.apply(this, args);
       tracer.recordAnnotation(new Annotation.ClientRecv());
     });
