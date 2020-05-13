@@ -22,7 +22,6 @@ Lo que se encuentra instrumentado por el momento son los controladores y servici
 - Pasar argumentos a anotaciones
 
 # Propuesta de permisos (ORIGINAL)
-# Propuesta de permisos
 
 ## Objetivo
 Como parte de la exploracion de una segunda version en angular9 + nestjs para Signot, se hizo un demo para plantear una propuesta del sistema de permisos.
