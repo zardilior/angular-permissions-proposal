@@ -67,6 +67,14 @@ Como parte de la exploracion de una segunda version en angular9 + nestjs para Si
   - knex
   - @angular/cli
 
+  Script de instalacion
+  ```shell
+  npm install -g npm
+  npm install -g yarn 
+  npm install -g knex 
+  npm install -g @angular/cli 
+  ```
+
   Para la Base de datos
   ```shell
   # levanta la bd
