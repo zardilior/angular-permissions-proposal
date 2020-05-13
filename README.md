@@ -1,4 +1,23 @@
-# Propuesta de permisos
+# Propuesta de permisos (BRANCH_SPECIFIC)
+
+## Objetivo del Branch
+Este branch en particular implementa instrumentacion con zipkin: 
+
+Para correr un servidor de zipkin local y no configurar nada:
+sudo docker run -d -p 9411:9411 openzipkin/zipkin
+
+Una vez hecho esto se puede acceder a:
+localhost:9411/zipkin
+para ver el ui de zipkin y buscar para ver todos los ultimos requests
+
+Nota: el ui de zipkin requiere search para mostrar muestra los ultimos no se updetea y su orden default no es cronologico asi que queda picarle a la columna de start time para verlos asi
+
+Lo que se encuentra instrumentado por el momento son los controladores y servicios y la entrada y salida del request
+
+### Posibles Mejoras
+Agregar zipkin-instrumentation-mysql2
+
+# Propuesta de permisos (ORIGINAL)
 
 ## Objetivo
 Como parte de la exploracion de una segunda version en angular9 + nestjs para Signot, se hizo un demo para plantear una propuesta del sistema de permisos.
@@ -43,42 +62,57 @@ Como parte de la exploracion de una segunda version en angular9 + nestjs para Si
   Se requiere hacer el setup del backend, de la bd de mysql y correr el frontend
 
   Para facilitar el trabajo se debe instalar:
-  npm
-  yarn
-  knex
-  @angular/cli
+  - npm
+  - yarn
+  - knex
+  - @angular/cli
 
   Para la Base de datos
+
   // levanta la bd
+
   sudo docker run --name signot-permisos-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=admin -e MYSQL_DATABASE=sdaf_propuesta_permisos -d mysql:5.7
+
   cd db
+
   // migra la estructura de la base de datos
+
   knex migration:latest 
+
   // inserta los registros iniciales/seeds
+
   knex seed:run
 
+
   Para el backend
+
   cd back
+
   yarn install
+
   npm start
 
+
   Para el frontend
+
   cd front 
+
   npm install
+
   ng serve
 
 ## Guia del demo
 
   Una vez ya teniendo el demo corriendo.
-  1- Entre a la aplicacion
-  2- Haga click en **Obtener acceso a usuarios permisos**, *que es un boton para temporalmente darse permisos de asignacion de permisos, para que no se quede atascado fuera de la aplicacion*
-  3- Entre a usuarios
-  4- Ahi podra ver los 3 paquetes de permisos haga click en ellos para agregarselos
-  5- Dentro de cada uno podra ver permisos que podra habilitar y deshabilitar, *incluyendo los necesarios para esta misma pantalla*
-  6- Ahora haga click en **Regresar al menu** , si se asigno todos los permisos, podra ver tres pantallas.
-  7- Entre a permisos, *Aqui puedes crear permisos y verlos todos, la parte con guiones son el nombre que se usa en el codigo *
-  8- Haga click en **Regresar al menu** y acceda a paquetes, ahi podra crear paquetes, verlos y al hacer click en un paquete ver sus permisos y asignarle nuevos o quitarle*
-  9- Haga click en **Regresar al menu** y acceda a usuarios, juegue un poco con los permisos y las diferentes pantallas
+  1. Entre a la aplicacion
+  2. Haga click en **Obtener acceso a usuarios permisos**, *que es un boton para temporalmente darse permisos de asignacion de permisos, para que no se quede atascado fuera de la aplicacion*
+  3. Entre a usuarios
+  4. Ahi podra ver los 3 paquetes de permisos haga click en ellos para agregarselos
+  5. Dentro de cada uno podra ver permisos que podra habilitar y deshabilitar, *incluyendo los necesarios para esta misma pantalla*
+  6. Ahora haga click en **Regresar al menu** , si se asigno todos los permisos, podra ver tres pantallas.
+  7. Entre a permisos, *Aqui puedes crear permisos y verlos todos, la parte con guiones son el nombre que se usa en el codigo *
+  8. Haga click en **Regresar al menu** y acceda a paquetes, ahi podra crear paquetes, verlos y al hacer click en un paquete ver sus permisos y asignarle nuevos o quitarle*
+  9. Haga click en **Regresar al menu** y acceda a usuarios, juegue un poco con los permisos y las diferentes pantallas
 
 ## Detalle tecnico
 
