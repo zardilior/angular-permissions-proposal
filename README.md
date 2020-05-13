@@ -69,12 +69,12 @@ Como parte de la exploracion de una segunda version en angular9 + nestjs para Si
 
   Para la Base de datos
   ```shell
-  // levanta la bd
+  # levanta la bd
   sudo docker run --name signot-permisos-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=admin -e MYSQL_DATABASE=sdaf_propuesta_permisos -d mysql:5.7
   cd db
-  // migra la estructura de la base de datos
+  # migra la estructura de la base de datos
   knex migration:latest 
-  // inserta los registros iniciales/seeds
+  # inserta los registros iniciales/seeds
   knex seed:run
   ```
 
