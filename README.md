@@ -104,15 +104,15 @@ Como parte de la exploracion de una segunda version en angular9 + nestjs para Si
 ## Guia del demo
 
   Una vez ya teniendo el demo corriendo.
-  1- Entre a la aplicacion
-  2- Haga click en **Obtener acceso a usuarios permisos**, *que es un boton para temporalmente darse permisos de asignacion de permisos, para que no se quede atascado fuera de la aplicacion*
-  3- Entre a usuarios
-  4- Ahi podra ver los 3 paquetes de permisos haga click en ellos para agregarselos
-  5- Dentro de cada uno podra ver permisos que podra habilitar y deshabilitar, *incluyendo los necesarios para esta misma pantalla*
-  6- Ahora haga click en **Regresar al menu** , si se asigno todos los permisos, podra ver tres pantallas.
-  7- Entre a permisos, *Aqui puedes crear permisos y verlos todos, la parte con guiones son el nombre que se usa en el codigo *
-  8- Haga click en **Regresar al menu** y acceda a paquetes, ahi podra crear paquetes, verlos y al hacer click en un paquete ver sus permisos y asignarle nuevos o quitarle*
-  9- Haga click en **Regresar al menu** y acceda a usuarios, juegue un poco con los permisos y las diferentes pantallas
+  1. Entre a la aplicacion
+  2. Haga click en **Obtener acceso a usuarios permisos**, *que es un boton para temporalmente darse permisos de asignacion de permisos, para que no se quede atascado fuera de la aplicacion*
+  3. Entre a usuarios
+  4. Ahi podra ver los 3 paquetes de permisos haga click en ellos para agregarselos
+  5. Dentro de cada uno podra ver permisos que podra habilitar y deshabilitar, *incluyendo los necesarios para esta misma pantalla*
+  6. Ahora haga click en **Regresar al menu** , si se asigno todos los permisos, podra ver tres pantallas.
+  7. Entre a permisos, *Aqui puedes crear permisos y verlos todos, la parte con guiones son el nombre que se usa en el codigo *
+  8. Haga click en **Regresar al menu** y acceda a paquetes, ahi podra crear paquetes, verlos y al hacer click en un paquete ver sus permisos y asignarle nuevos o quitarle*
+  9. Haga click en **Regresar al menu** y acceda a usuarios, juegue un poco con los permisos y las diferentes pantallas
 
 ## Detalle tecnico
 
