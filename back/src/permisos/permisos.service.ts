@@ -16,8 +16,9 @@ export class PermisosService {
   ){}
 
   @Trace
-  getAll():Promise<Permiso[]> {
-    return this.db.query(`SELECT * FROM permisos`);
+  async getAll():Promise<Permiso[]> {
+    const [rows,fields] = await this.db.query(`SELECT * FROM permisos`);
+    return rows;
   }
 
   @Trace

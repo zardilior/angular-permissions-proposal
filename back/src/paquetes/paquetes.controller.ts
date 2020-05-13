@@ -34,7 +34,6 @@ export class PaquetesController {
   @Get('/')
   @Trace
   getAll(): Promise<Paquete[]> {
-    this.logger.log('Hola carlos');
     return this.service.getAll()  
   }
 

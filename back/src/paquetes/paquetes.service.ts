@@ -17,8 +17,8 @@ export class PaquetesService {
   }
 
   @Trace
-  getAll():Promise<Paquete[]> {
-    return this.db.query(
+  async getAll():Promise<Paquete[]> {
+     const [rows,fields] = await this.db.query(
       `
         SELECT paquetes_permisos.*, 
           group_concat(relacion_paquetes_permisos.permisos_nombre) 
@@ -28,6 +28,7 @@ export class PaquetesService {
         group by paquetes_permisos.id
       `
     );
+    return rows;
   }
 
   @Trace

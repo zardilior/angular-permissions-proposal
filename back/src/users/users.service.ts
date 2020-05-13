@@ -19,7 +19,7 @@ export class UsersService {
     return this.db.query(`SELECT * FROM users`);
   }
   async getPermisosByUserId(userId: number): Promise<string[]> {
-    const result = await this.db.query(
+    const [rows,fields] = await this.db.query(
       `
         SELECT permisos_users.permisos_nombre
           FROM permisos_users
@@ -27,7 +27,7 @@ export class UsersService {
       `,
       [userId]
     );
-    return result.map(({ permisos_nombre }) => permisos_nombre);
+    return rows.map(({ permisos_nombre }) => permisos_nombre);
   }
 
   @Trace

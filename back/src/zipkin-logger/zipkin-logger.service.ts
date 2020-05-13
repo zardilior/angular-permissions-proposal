@@ -10,32 +10,32 @@ export class ZipkinLoggerService extends Logger {
   constructor(){
     super();
   }
-  error(message: string, trace: string) {
-    super.error(message, trace);
+  error(message:any, trace: string, context?:string,isTimeDiffEnabled?:boolean) {
+    super.error(message, trace, context);
     //print on tracer too
     const traces = JSON.stringify({message, trace});
-    this.tracer.local(traces, () => ({}))
+    this.tracer.local(traces, () => {}); 
   }
-  log(message: string) {
-    super.log(message);
+  log(message: any, context?:string,isTimeDiffEnabled?:boolean) {
+    super.log(message,context);
     //print on this.tracer too
-    const trace = JSON.stringify({message});
-    this.tracer.local(trace,() => ({}))
+    //const trace = JSON.stringify(message);
+    //this.tracer.local(trace, ()=>{}); 
   }
-  warn(message: string) {
-    super.warn(message);
-    //print on this.tracer too
-    const trace = JSON.stringify(message);
-    this.tracer.local(trace,() => ({}))
-  }
-  debug(message: string) {
-    super.debug(message);
+  warn(message: any, context?:string,isTimeDiffEnabled?:boolean) {
+    super.warn(message,context);
     //print on this.tracer too
     const trace = JSON.stringify(message);
     this.tracer.local(trace,() => ({}))
   }
-  verbose(message: string) {
-    super.verbose(message);
+  debug(message: any, context?:string,isTimeDiffEnabled?:boolean) {
+    super.debug(message,context);
+    //print on this.tracer too
+    const trace = JSON.stringify(message);
+    this.tracer.local(trace,() => ({}))
+  }
+  verbose(message: any, context?:string,isTimeDiffEnabled?:boolean) {
+    super.verbose(message,context);
     //print on this.tracer too
     const trace = JSON.stringify(message);
     this.tracer.local(trace,() => ({}))
