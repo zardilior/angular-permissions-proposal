@@ -13,7 +13,7 @@ import { Trace } from 'src/decorators/trace-everything.decorator';
 @Controller('usuarios')
 export class UsersController {
 
-  private logger = new Logger(UsersController.name);
+  public logger = new Logger(UsersController.name);
   constructor(
     private service: UsersService 
   ){

@@ -17,7 +17,7 @@ import { Trace } from 'src/decorators/trace-everything.decorator';
 @Controller('paquetes')
 @UsePipes(new ValidationPipe())
 export class PaquetesController {
-  private logger = new Logger(PaquetesController.name);
+   public logger = new Logger(PaquetesController.name);
 
   constructor(
     private service: PaquetesService

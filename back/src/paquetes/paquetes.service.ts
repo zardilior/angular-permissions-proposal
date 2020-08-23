@@ -10,7 +10,7 @@ import { Trace } from 'src/decorators/trace-everything.decorator';
 
 @Injectable()
 export class PaquetesService {
-  private logger = new Logger(PaquetesService.name);
+  public logger = new Logger(PaquetesService.name);
   constructor(
     @Inject('DB') private db: Pool,
   ){

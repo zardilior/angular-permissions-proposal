@@ -5,7 +5,7 @@ import { tracer } from 'src/tracer';
 
 export const Traceable =  function<T extends { new(...args: any[]): {} }>(target: T) {
   return class extends target {
-    private logger: Logger;
+    public logger: Logger;
     constructor(...args) {
       super(...args);
       this.logger = new Logger();

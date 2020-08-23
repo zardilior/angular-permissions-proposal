@@ -16,7 +16,7 @@ import { Trace } from 'src/decorators/trace-everything.decorator';
 @Controller('permisos')
 @UsePipes(new ValidationPipe())
 export class PermisosController {
-  private logger = new Logger(PermisosController.name);
+  public logger = new Logger(PermisosController.name);
   constructor(
     private service: PermisosService
   ){

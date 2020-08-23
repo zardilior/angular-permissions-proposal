@@ -24,13 +24,13 @@ Lo que se encuentra instrumentado por el momento son los controladores y servici
 # Propuesta de permisos (ORIGINAL)
 
 ## Objetivo
-Como parte de la exploracion de una segunda version en angular9 + nestjs para Signot, se hizo un demo para plantear una propuesta del sistema de permisos.
+Como parte de la exploracion de un sistema de permisos , se hizo un demo para plantear una propuesta del sistema de permisos.
 
 ## Introduccion
 
   Se encontro que originalmente, se limitaba el acceso a diferentes usuarios cuyos potenciales permisos estaban limitados por sus roles, es decir. Un usuario con cierto rol podia tener habilitados y deshabilitados ciertos permisos unicamente. Estos permisos y roles defininian el acceso a funcionalidad, ocultando ciertos botones y pantallas.
 
-  En los nuevos requerimentos se incluye el acceso a modulos dependiendo del pago de paquetes, roles y ciertas personalizaciones. Para obtener esto se penso en convertir estos grupos de permisos disponibles en paquetes que fueran afectados por el rol y el paquete pero sobreescribibles por el equipo de Signot.
+  En los nuevos requerimentos se incluye el acceso a modulos dependiendo del pago de paquetes, roles y ciertas personalizaciones. Para obtener esto se penso en convertir estos grupos de permisos disponibles en paquetes que fueran afectados por el rol y el paquete pero sobreescribibles.
 
   En base a esto:
 
